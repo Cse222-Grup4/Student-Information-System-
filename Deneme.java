@@ -13,6 +13,6 @@ Class Deneme{
   System.out.println("deneme2");
   System.out.println("deneme2");
    System.out.println("12123123");
-  System.out.println("16th line");
+  System.out.println("qwer");
   }
 }
