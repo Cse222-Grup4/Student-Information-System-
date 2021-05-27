@@ -12,5 +12,6 @@ Class Deneme{
   System.out.println("deneme2");
   System.out.println("deneme2");
   System.out.println("deneme2");
+   System.out.println("12123123");
   }
 }
