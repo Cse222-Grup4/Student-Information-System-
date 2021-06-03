@@ -29,7 +29,7 @@ public class DataBase {
         }
     }
 
-    private void readUsersFile() throws IOException {
+    private void readTeachersFile() throws IOException {
         // reader for read teachers file
         File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
         BufferedReader bufferedReader = new BufferedReader(new FileReader(usersFile));
