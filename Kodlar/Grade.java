@@ -26,7 +26,7 @@ public class Grade {
         this.projectGrade = projectGrade;
     }
     public int getTotalGrade(){
-        totalGrade = (int)((0.3 * midtermGrade) + (0.5 * finalGrade) + (0.1 * projectGrade));
+        totalGrade = (int)((0.4 * midtermGrade) + (0.5 * finalGrade) + (0.1 * projectGrade));
         return totalGrade;
     }
     public void setTotalGrade(int totalGrade){
