@@ -1,4 +1,3 @@
-package sis;
 /**
  * Officer Class
  * @author aygun
