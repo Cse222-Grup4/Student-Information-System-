@@ -39,9 +39,9 @@ public class Officer extends Person{
     }
     
     /**
-     * 
-     * @param event
-     * @return
+     * Approves/disapproves event.
+     * @param event Event object
+     * @return Whether event is approved.
      */
     public boolean ApproveEvent(Event event){
     	Scanner sc = null;
