@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Officer extends Person{
 	
 	/**
-	 * Constructor with four parameters.
+	 * Constructor with five parameters.
 	 * @param name Officer's name.
 	 * @param surname Officer's surname.
  	 * @param mail Officer's e-mail address.
