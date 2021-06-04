@@ -60,7 +60,7 @@ public class DataBase {
         }
         bufferedReader.close();
     }
-
+    
     public void displayTeachers(){
         for(Teacher t : teachers)
             System.out.println(t);
