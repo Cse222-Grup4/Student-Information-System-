@@ -14,14 +14,14 @@ public class DataBase {
     private String teachersFilePath = "teachers.txt";
 
 
-    private HashMap <String,ArrayList<Student>> courseStudents;
+   // private HashMap <String,ArrayList<Student>> courseStudents;
 
 
     DataBase() throws IOException{
         try{
             students = new ArrayList<>();
             teachers = new ArrayList<>();
-            courseStudents = new HashMap<>();
+         //   courseStudents = new HashMap<>();
             events = new LinkedList<>();
             curriculums = new ArrayList<>();
             readUsersFile();
