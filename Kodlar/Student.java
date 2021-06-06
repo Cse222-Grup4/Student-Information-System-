@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class Student extends Person {
+public class Student extends Person implements Comparable<Student>{
     private int advisorTeacherID;
     private int entryYear;
     private int term;
@@ -186,4 +186,16 @@ public class Student extends Person {
         ++term;
         courseSelectionApprove = false;
     }
+    @Override
+	public int compareTo(Student o) {
+		if(getUserID() == o.getUserID()) {
+			return 0;
+		}
+		else if(getUserID() > o.getUserID()) {
+			return 1;
+		}
+		else {
+			return -1;
+		}
+	}
 }
