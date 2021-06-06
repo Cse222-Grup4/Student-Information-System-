@@ -69,7 +69,7 @@ public class DataBase {
 	public Curriculum getCurriculum(String department) {
 		for(int i=0;i<curriculums.size();i++) {
 			if(curriculums.get(i).getDepartment().equals(department)) {
-				return curriculums.get(i);
+				 return curriculums.get(i);
 			}
 		}
 		return null;
