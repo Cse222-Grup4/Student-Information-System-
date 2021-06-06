@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+
 public class Student extends Person implements Comparable<Student>{
     private int advisorTeacherID;
     private int entryYear;
