@@ -10,7 +10,7 @@ public class DataBase {
     private ArrayList<Student> students;
     private ArrayList<Teacher> teachers;
     private Queue<Event> events;
-
+    private ArrayList<Curriculum> curriculums;
     private String teachersFilePath = "teachers.txt";
 
 
@@ -23,6 +23,7 @@ public class DataBase {
             teachers = new ArrayList<>();
             courseStudents = new HashMap<>();
             events = new LinkedList<>();
+            curriculums = new ArrayList<>();
             readUsersFile();
         }catch(IOException io){
             System.out.println("IOException occurred when reading 'teachers.txt' file.The exception is printing: ");
@@ -65,6 +66,14 @@ public class DataBase {
         for(Teacher t : teachers)
             System.out.println(t);
     }
+	public Curriculum getCurriculum(String department) {
+		for(int i=0;i<curriculums.size();i++) {
+			if(curriculums.get(i).getDepartment().equals(department)) {
+				return curriculums.get(i);
+			}
+		}
+		return null;
+	}
 
 
 
