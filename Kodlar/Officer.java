@@ -1,10 +1,8 @@
-/**
- * Officer Class
- * @author aygun
- */
-
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Officer extends Person {
 
