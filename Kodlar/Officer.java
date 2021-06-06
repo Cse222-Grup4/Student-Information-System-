@@ -175,4 +175,85 @@ public class Officer extends Person {
   public void setUserSurname(String surName) {
     super.setUserSurname(surName);
   }
+  
+  
+    public void confirmCancelEvents(int situation,String orderEvent) throws IOException{
+
+        File events = new File("events.txt");
+        File temp = new File("deleted.txt");
+        String line;
+        temp.createNewFile();
+        BufferedReader br = new BufferedReader(new FileReader("events.txt"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("deleted.txt"));
+
+        br.readLine();
+
+        while((line = br.readLine()) != null){
+
+            if(situation == 1){
+                if(line.contains(orderEvent)){
+                    writer.write(line + "\n");
+                    writer.write("Situation: CONFIRM ORDER "+ "\n");
+                    br.readLine();
+                
+                }
+
+                else {
+                    writer.write(line + "\n");
+                }
+            }
+        
+            else if(situation == 0){
+                if(line.contains(orderEvent)){
+
+                    writer.write(line+"\n" );
+                    writer.write("Situation: CANCELLED ORDER" + "\n");
+                    br.readLine();
+                }
+            
+                else{
+                    writer.write(line + "\n");
+                }
+                
+            }
+        
+
+        }
+            br.close();
+            writer.close();
+            events.delete();
+            temp.renameTo(events);
+        
+    }
+
+
+    public void showEvents()throws IOException{
+
+        Queue<String>record = new LinkedList<String>();
+        String line = "";
+
+        BufferedReader br = new BufferedReader(new FileReader("events.txt"));
+
+        br.readLine();
+
+        while((line = br.readLine()) != null){
+            record.add(line + "\n");
+        }
+    
+        br.close();
+
+        System.out.println(record);
+    }
+
+
+    public void addEvent(String eventOrder) throws IOException{
+      
+        BufferedWriter writer = new BufferedWriter(new FileWriter("events.txt",true));
+        writer.write("\n"+eventOrder+"\n");
+        writer.write("NOT CHECKED");
+        writer.close();
+    
+    }
+  
+  
 }
