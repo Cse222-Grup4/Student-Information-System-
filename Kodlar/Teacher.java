@@ -24,8 +24,11 @@ public class Teacher extends Person {
 
     public void addGrade(String courseCode,Student student,int grade,int type)
     {
-            student.addGrade(courseCode,grade,type);
+        student.addGrade(courseCode,grade,type);
     }
-
+    
+    public void editGrade(String courseCode,Student student,int grade,int type){
+        addGrade(courseCode, student, grade, type);
+    }
 
 }
