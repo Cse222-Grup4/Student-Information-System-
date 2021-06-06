@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.LinkedList;
 
 
 public class Student extends Person implements Comparable<Student>{
