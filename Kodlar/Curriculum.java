@@ -15,6 +15,7 @@ public class Curriculum {
     public void setDepartment(String department){
     	this.department = department;
     }
+	
     @Override
     public String toString() {
     	String temp = "";
