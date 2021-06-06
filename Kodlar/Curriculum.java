@@ -4,7 +4,7 @@ public class Curriculum {
 	private ArrayList<Course> courseList;
 	private String department;
 	Curriculum(){
-    	courseList = new ArrayList<>();
+    	courseList = new ArrayList<>();	
     }
     public void addCourse(Course newCourse){
     	courseList.add(newCourse);
@@ -15,7 +15,6 @@ public class Curriculum {
     public void setDepartment(String department){
     	this.department = department;
     }
-	
     @Override
     public String toString() {
     	String temp = "";
