@@ -186,7 +186,8 @@ public class Student extends Person implements Comparable<Student>{
         ++term;
         courseSelectionApprove = false;
     }
-    @Override
+    
+	@Override
 	public int compareTo(Student o) {
 		if(getUserID() == o.getUserID()) {
 			return 0;
