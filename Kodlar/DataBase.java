@@ -66,14 +66,14 @@ public class DataBase {
         for(Teacher t : teachers)
             System.out.println(t);
     }
-    public Curriculum getCurriculum(String department) {
-	for(int i=0;i<curriculums.size();i++) {
-		if(curriculums.get(i).getDepartment().equals(department)) {
-			return curriculums.get(i);
+	public Curriculum getCurriculum(String department) {
+		for(int i=0;i<curriculums.size();i++) {
+			if(curriculums.get(i).getDepartment().equals(department)) {
+				return curriculums.get(i);
+			}
 		}
+		return null;
 	}
-	return null;
-    }
 
 
 
