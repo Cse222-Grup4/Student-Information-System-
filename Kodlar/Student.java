@@ -199,4 +199,39 @@ public class Student extends Person implements Comparable<Student>{
 			return -1;
 		}
 	}
+
+
+
+
+
+	public void addEvent(String eventOrder) throws IOException{
+      
+        BufferedWriter writer = new BufferedWriter(new FileWriter("events.txt",true));
+        writer.write("\n"+eventOrder+"\n");
+        writer.write("NOT CHECKED");
+        writer.close();
+    
+    }
+
+
+    public void showEvents()throws IOException{
+
+        Queue<String>record = new LinkedList<String>();
+        String line = "";
+
+        BufferedReader br = new BufferedReader(new FileReader("events.txt"));
+
+        br.readLine();
+
+        while((line = br.readLine()) != null){
+            record.add(line + "\n");
+        }
+    
+        br.close();
+
+        System.out.println(record);
+    }
+
+
+
 }
