@@ -9,13 +9,14 @@ public class Course {
     private int numOfAttendance = 0;
     private int numOfAbsent = 0;
     private boolean ísPass = false;
-
+    private int term;
     private ArrayList<Student> students;
 
-    public Course(String courseCode, String courseName, int credit) {
+    public Course(String courseCode, String courseName, int credit,int term) {
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.credit = credit;
+        this.term = term;
         absent = new ArrayList<>();
         grade = new Grade();
     }
@@ -49,6 +50,12 @@ public class Course {
     }
     public void setCredit(int credit) {
         this.credit = credit;
+    }
+    public int getTerm(){
+        return term;
+    }
+    public int setTerm(int term){
+        this.term = term;
     }
     public int getNumOfAttendance() {
         return numOfAttendance;
