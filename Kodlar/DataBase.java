@@ -32,6 +32,8 @@ public class DataBase {
         }
     }
 
+	
+	// course kisminda sikinti var.Courselarin tum ozelliklerini yazmak lazim ya da farkli bir course dosyasi olusturmak.
     private void readTeachersFile() throws IOException {
         // reader for read teachers file
         File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
@@ -51,12 +53,15 @@ public class DataBase {
             Teacher teacher = new Teacher(userMail,userPassword,userName,userSurname,userID,this);
 
             // reading teacher's courses
-            courseIDLine = line.split(";")[5];
+		// hata var simdilik yorum satirinda
+           /*
+	   courseIDLine = line.split(";")[5];
             if(!courseIDLine.equals("null")) {
                 courseIDs = courseIDLine.split(",");
                 for (String c : courseIDs)
                     teacher.addCourse(c);
             }
+	    */
             teachers.add(teacher);
         }
         bufferedReader.close();
