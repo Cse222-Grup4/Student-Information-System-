@@ -80,17 +80,7 @@ public class Student extends Person implements Comparable<Student>{
         this.currentCourses = currentCourses;
     }
 
-    /*
-    public void addEvent(Event e)
-    {
-        // Officier.approveEvent(e);
-    }
-    */
-
-    public void joinEvent(Event e)
-    {
-        eventsToJoin.add(e);
-    }
+   
 
 
     public void viewTranscript()
