@@ -15,7 +15,7 @@ public class Officer extends Person {
    * @param ID Officer ID number.
    */
   Officer(String name, String surname, String mail, String password, int ID) {
-    super(name, surname, mail, password, ID);
+    super(mail, password, name, surname, ID);
     //TODO Auto-generated constructor stub
   }
 
