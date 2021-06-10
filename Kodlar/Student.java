@@ -2,13 +2,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.LinkedList;
+import java.util.*;
+import java.io.File;
 
-
-public class Student extends Person implements Comparable<Student>{
+public class Student extends Person{
     private int advisorTeacherID;
     private int entryYear;
     private int term;
@@ -16,6 +13,8 @@ public class Student extends Person implements Comparable<Student>{
     private boolean courseSelectionApprove;
     private ArrayList<Course> currentCourses;
     private ArrayList<ArrayList<Course>> pastCourses;
+    private HashMap<String, Integer> Attendance;
+    private HashMap<String, Grade> Grades;
     private PriorityQueue<Event> eventsToJoin = new PriorityQueue(new Date.EventComparator());
 
     /*
@@ -30,7 +29,27 @@ public class Student extends Person implements Comparable<Student>{
     {
         super(mail, password, name, surname, id);
         currentCourses = new ArrayList<>();
+        pastCourses = new ArrayList<ArrayList<Course>>();
         entryYear = year;
+        Grades = new HashMap();
+        Attendance = new HashMap<String, Integer>();
+
+    }
+
+    public ArrayList<Course> getCurrentCourses(){
+        return currentCourses;
+    }
+
+    public ArrayList<ArrayList<Course>> getPastCourses(){
+        return pastCourses;
+    }
+
+    public HashMap<String,Integer> getAttendance(){
+        return Attendance;
+    }
+
+    public HashMap<String, Grade> getGrades(){
+        return Grades;
     }
 
     public void setAdvisorTeacherID(int id)
@@ -82,8 +101,21 @@ public class Student extends Person implements Comparable<Student>{
     {
         this.currentCourses = currentCourses;
     }
+    public int getEntryYear(){
+        return entryYear;
+    }
 
-   
+    /*
+    public void addEvent(Event e)
+    {
+        // Officier.approveEvent(e);
+    }
+    */
+
+    public void joinEvent(Event e)
+    {
+        eventsToJoin.add(e);
+    }
 
 
     public void viewTranscript()
@@ -107,7 +139,7 @@ public class Student extends Person implements Comparable<Student>{
                 System.out.printf("Course code: %d | Course name: %s | Course credit: %d | Grade: %s%n", c.getCourseCode(),
                                                                                                          c.getCourseName(),
                                                                                                          c.getCredit(),
-                                                                                                         c.getLetterGrade());
+                                                                                                         c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade(), Attendance.get(currentCourses.get(i).getCourseCode())));
             }
         }
     }
@@ -115,7 +147,7 @@ public class Student extends Person implements Comparable<Student>{
     public void viewGrades()
     {
         for (int i = 0; i < currentCourses.size(); ++i)
-            System.out.print(currentCourses.get(i).getGrade().toString());
+            System.out.print(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade());
     }
 
     public void viewAttandance()
@@ -123,13 +155,13 @@ public class Student extends Person implements Comparable<Student>{
         for (int i = 0; i < currentCourses.size(); ++i) {
             Course c = currentCourses.get(i);
             System.out.println("Course name: " + c.getCourseName());
-            System.out.println("Total number of courses " + c.getNumOfAttendance());
-            System.out.println("Number of absent day: " + c.getNumOfAbsent());
+            //System.out.println("Total number of courses " + c.getNumOfAttendance());
+            //System.out.println("Number of absent day: " + c.getNumOfAbsent());
 
-            for (int k = 0; k < c.getAbsent().size(); ++k)
-                System.out.println("  Date: " + c.getAbsent().get(k).getDate());
+           // for (int k = 0; k < c.getAbsent().size(); ++k)
+           //     System.out.println("  Date: " + c.getAbsent().get(k).getDate());
 
-            if (c.getLetterGrade().equals("NA"))
+            if (c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade(), Attendance.get(currentCourses.get(i).getCourseCode())).equals("NA"))
                 System.out.println("Currently your grade is NA. You should attend your classes if you want to pass..");
         }
     }
@@ -164,14 +196,14 @@ public class Student extends Person implements Comparable<Student>{
         while (!copyEvents.isEmpty())
             events.add(copyEvents.poll());
     }
-
+/*
     public void addGrade(String courseCode,int grade,int type)
     {
         for (Course course : currentCourses)
             if (course.getCourseCode().equals(courseCode))
                 course.addGrade(grade,type);
     }
-
+*/
     public void endOfSemester()
     {
         pastCourses.add(new ArrayList<Course>(currentCourses));
@@ -179,25 +211,8 @@ public class Student extends Person implements Comparable<Student>{
         ++term;
         courseSelectionApprove = false;
     }
-    
-	@Override
-	public int compareTo(Student o) {
-		if(getUserID() == o.getUserID()) {
-			return 0;
-		}
-		else if(getUserID() > o.getUserID()) {
-			return 1;
-		}
-		else {
-			return -1;
-		}
-	}
 
-
-
-
-
-	public void addEvent(String eventOrder) throws IOException{
+    public void addEvent(String eventOrder) throws IOException{
       
         BufferedWriter writer = new BufferedWriter(new FileWriter("events.txt",true));
         writer.write("\n"+eventOrder+"\n");
@@ -205,7 +220,6 @@ public class Student extends Person implements Comparable<Student>{
         writer.close();
     
     }
-
 
     public void showEvents()throws IOException{
 
@@ -224,7 +238,5 @@ public class Student extends Person implements Comparable<Student>{
 
         System.out.println(record);
     }
-
-
 
 }
