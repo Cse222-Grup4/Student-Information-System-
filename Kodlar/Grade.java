@@ -6,6 +6,16 @@ public class Grade {
 
     Grade(){}
 
+    Grade(int midtermGrade, int finalGrade, int projectGrade){
+        this.midtermGrade = midtermGrade;
+        this.finalGrade =  finalGrade;
+        this.projectGrade = projectGrade;
+    }
+
+    Grade(int totalGrade){
+        this.totalGrade = totalGrade;
+    }
+
     // getters and setters
     public int getMidtermGrade() {
         return midtermGrade;
