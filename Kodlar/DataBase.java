@@ -73,6 +73,35 @@ public class DataBase {
         writer.write(o.getUserID() + "\n");
         writer.close();    	
     }
+    
+    /**
+     * Writes all officers in list into the text file.
+     * @throws IOException
+     */
+    public void exportOfficersList() throws IOException {
+    	BufferedWriter writer = new BufferedWriter(new FileWriter(officersFilePath));
+    	
+    	for(int i=0; i<officers.size(); i++)
+    	{
+    		writer.write(officers.get(i).getUserMail() + ";");
+    		writer.write(officers.get(i).getUserPassword() + ";");
+    		writer.write(officers.get(i).getUserName() + ";");
+    		writer.write(officers.get(i).getUserSurname() + ";");
+    		writer.write(officers.get(i).getUserID() + "\n");
+    	}
+    	writer.close();
+    }
+    
+    /** 
+     * Adds an officer to the list
+     * @param o Officer object
+     * @return Whether adding is successful
+     */
+    public boolean addOfficer(Officer o) {
+    	boolean b;
+    	b = officers.add(o);
+    	return b;
+    }
 
     
     // course kisminda sikinti var.Courselarin tum ozelliklerini yazmak lazim ya da farkli bir course dosyasi olusturmak.
