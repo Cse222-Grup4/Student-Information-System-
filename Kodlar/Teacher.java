@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Teacher extends Person {
     private DataBase database;
-    private ArrayList<CourseTeacher> courses;
+    private ArrayList<Course> courses;
 
     Teacher(String mail,String password,DataBase db)
     {
@@ -18,13 +18,22 @@ public class Teacher extends Person {
         courses = new ArrayList<>();
     }
 
-    public void viewGrades(Student[] students)
+    public void viewAllGrades(ArrayList<Student> students)
     {
         for (Student student : students) {
             System.out.println("The grades for student:" + student.getUserName() + " " + student.getUserSurname());
             student.viewGrades();
         }
     }
+
+    public void viewCourseGrades(ArrayList<Student> students,String courseCode)
+    {
+        for (Student student : students) {
+            System.out.println("The grades for student:" + student.getUserName() + " " + student.getUserSurname() +" of course:" + courseCode);
+            student.viewCourseGrades(courseCode);
+        }
+    }
+
 
     public void addGrade(String courseCode,Student student,int grade,int type)
     {
@@ -36,7 +45,7 @@ public class Teacher extends Person {
     }
     
     
-    public void addCourse(CourseTeacher course){
+    public void addCourse(Course course){
         courses.add(course);
     }
     
