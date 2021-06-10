@@ -1,17 +1,22 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class DataBase {
 
     private ArrayList<Student> students;
     private ArrayList<Teacher> teachers;
+    private ArrayList<Officer> officers;
     private Queue<Event> events;
     private ArrayList<Curriculum> curriculums;
     private String teachersFilePath = "teachers.txt";
+    private String officersFilePath = "officers.txt";
 
 
    // private HashMap <String,ArrayList<Student>> courseStudents;
@@ -21,6 +26,7 @@ public class DataBase {
         try{
             students = new ArrayList<>();
             teachers = new ArrayList<>();
+            officers = new ArrayList<>();
          //   courseStudents = new HashMap<>();
             events = new LinkedList<>();
             curriculums = new ArrayList<>();
@@ -30,6 +36,42 @@ public class DataBase {
             io.printStackTrace();
             throw io;
         }
+    }
+    
+    /**
+     * Reads text file and adds officers into array list of officers.
+     * @throws NumberFormatException If Officer's ID is not a valid number
+     * @throws IOException If text file is not found
+     */
+    public void importOfficersFromFile() throws NumberFormatException, IOException {
+    	String line;
+    	BufferedReader br = new BufferedReader(new FileReader(officersFilePath));
+    	
+    	while ((line = br.readLine()) != null) {
+    		officers.add(new Officer(
+    				line.split(";")[0],
+    				line.split(";")[1],
+    				line.split(";")[2],
+    				line.split(";")[3],
+    				Integer.parseInt(line.split(";")[4])
+    				));
+    	}
+    }
+    
+    /**
+     * Appends an officer to end of text file which is storing officers.
+     * @param o Officer object
+     * @throws IOException If creating file is failed
+     */
+    public void exportOfficerToFile(Officer o) throws IOException {
+    	// Appends end of file
+        BufferedWriter writer = new BufferedWriter(new FileWriter(officersFilePath,true));
+        writer.write(o.getUserMail() + ";");
+        writer.write(o.getUserPassword() + ";");
+        writer.write(o.getUserName() + ";");
+        writer.write(o.getUserSurname() + ";");
+        writer.write(o.getUserID() + "\n");
+        writer.close();    	
     }
 
     
