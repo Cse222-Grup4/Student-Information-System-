@@ -148,6 +148,15 @@ public class Student extends Person{
     {
         for (int i = 0; i < currentCourses.size(); ++i)
             System.out.print(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade());
+            //System.out.println(Grades.get(currentCourses.get(i));
+    }
+    
+    // viewing the grade of single course, the course id is given with parameter
+    public void viewCourseGrades(String courseCode){
+        if(Grades.get(courseCode) == null)
+            System.out.println("No grade for student");
+        else
+            System.out.println(Grades.get(courseCode));
     }
 
     public void viewAttandance()
@@ -196,14 +205,20 @@ public class Student extends Person{
         while (!copyEvents.isEmpty())
             events.add(copyEvents.poll());
     }
-/*
+
+    // pre: should be mapping for the keys(course codes)
     public void addGrade(String courseCode,int grade,int type)
     {
-        for (Course course : currentCourses)
-            if (course.getCourseCode().equals(courseCode))
-                course.addGrade(grade,type);
+        if(Grades.get(courseCode) == null)
+            Grades.put(courseCode,new Grade());
+        switch (type){
+            case 1 -> Grades.get(courseCode).setMidtermGrade(grade);
+            case 2 -> Grades.get(courseCode).setFinalGrade(grade);
+            case 3 -> Grades.get(courseCode).setProjectGrade(grade);
+        }
     }
-*/
+    
+
     public void endOfSemester()
     {
         pastCourses.add(new ArrayList<Course>(currentCourses));
