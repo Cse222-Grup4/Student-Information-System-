@@ -104,8 +104,7 @@ public class DataBase {
     }
 
     
-    // course kisminda sikinti var.Courselarin tum ozelliklerini yazmak lazim ya da farkli bir course dosyasi olusturmak.
-    private void readTeachersFile() throws IOException {
+     private void readTeachersFile() throws IOException {
         // reader for read teachers file
         File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
         BufferedReader bufferedReader = new BufferedReader(new FileReader(usersFile));
@@ -123,19 +122,53 @@ public class DataBase {
 
             Teacher teacher = new Teacher(userMail,userPassword,userName,userSurname,userID,this);
 
-            // reading teacher's courses
-        // hata var simdilik yorum satirinda
-           /*
-       courseIDLine = line.split(";")[5];
+            if(courses.size() == 0)
+                readCourses("courses.txt");
+
+            courseIDLine = line.split(";")[5];
             if(!courseIDLine.equals("null")) {
                 courseIDs = courseIDLine.split(",");
-                for (String c : courseIDs)
-                    teacher.addCourse(c);
+                for (String c : courseIDs) {
+                    teacher.addCourse(findCourseWID(c));
+                }
             }
-        */
             teachers.add(teacher);
         }
         bufferedReader.close();
+    }
+    
+    private void writeTeachersFile() throws IOException {
+        // writer for read teachers file
+        File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(usersFile));
+
+        bufferedWriter.write("id;mail;password;name;surname;courseIDs\n");
+        ArrayList<String> courseIDs;
+
+        for (Teacher teacher : teachers) {
+            bufferedWriter.write(teacher.getUserID() + ";"
+                    + teacher.getUserMail() + ";"
+                    + teacher.getUserPassword() + ";"
+                    + teacher.getUserName() + ";"
+                    + teacher.getUserSurname() + ";");
+            courseIDs = teacher.getCourseIDs();
+            if (courseIDs == null)
+                bufferedWriter.write("null\n");
+            else{
+                for(int i=0;i<courseIDs.size()-1;++i)
+                    bufferedWriter.write(courseIDs.get(i) + ",");
+                bufferedWriter.write(courseIDs.get(courseIDs.size()-1) +"\n");
+            }
+        }
+        bufferedWriter.close();
+    }
+    
+    private Course findCourseWID(String courseID) {
+        for (Course course : courses) {
+            if (course.getCourseCode().equals(courseID))
+                return course;
+        }
+        return null;
     }
 
     public boolean readCourses(String filename){
