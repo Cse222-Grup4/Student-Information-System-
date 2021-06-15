@@ -64,6 +64,14 @@ public class Teacher extends Person {
     }
     
     
+    public void addAttendance(Student student,String courseCode){
+        if(student.getAttendance().containsKey(courseCode)) {
+            student.getAttendance().replace(courseCode, student.getAttendance().get(courseCode)+1);
+        }
+        student.getAttendance().put(courseCode, 1);
+    }
+    
+    
     public void addCourse(Course course){
         courses.add(course);
     }
