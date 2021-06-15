@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Course {
+public class Course implements Comparable<Course>  {
     //private Grade grade;
     // private ArrayList<Attendance> absent;
     private int courseTerm;
@@ -114,4 +114,11 @@ public class Course {
                 ",  courseTerm=" +  courseTerm +
                 '}';
     }
+    
+    @Override
+    public int compareTo(Course o) {
+        return Integer.compare(getCredit(),o.getCredit());
+    }
+    
+    
 }
