@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.*;
 import java.io.File;
 
-public class Student extends Person{
+public class Student extends Person implements Comparable<Studetnt>{
     private int advisorTeacherID;
     private int entryYear;
     private int term;
@@ -252,6 +252,11 @@ public class Student extends Person{
         br.close();
 
         System.out.println(record);
+    }
+        
+    @Override
+    public int compareTo(Student o) {
+        return Integer.compare(getUserID(),other.getUserID());
     }
 
 }
