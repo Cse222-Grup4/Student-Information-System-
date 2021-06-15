@@ -20,7 +20,7 @@ public class Curriculum {
     	String temp = "";
     	temp += "Department: " + department + "\n" + "Term\tCourse Code\tCourse Name\t\t\tCredit\n" ;
     	for(int i=0;i<courseList.size();i++) {
-    		temp += courseList.get(i).getTerm() + "\t" + courseList.get(i).getCourseCode()+ "\t" + courseList.get(i).getCourseName() +"\t\t" + courseList.get(i).getCredit() +"\n";
+    		temp += courseList.get(i).getCourseTerm() + "\t" + courseList.get(i).getCourseCode()+ "\t" + courseList.get(i).getCourseName() +"\t\t" + courseList.get(i).getCredit() +"\n";
     	}
     	return temp;
     }	
