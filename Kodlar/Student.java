@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.*;
 import java.io.File;
 
-public class Student extends Person implements Comparable<Studetnt>{
+public class Student extends Person implements Comparable<Student>{
     private int advisorTeacherID;
     private int entryYear;
     private int term;
