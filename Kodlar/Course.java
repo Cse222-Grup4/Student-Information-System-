@@ -38,6 +38,15 @@ public class Course implements Comparable<Course>  {
     public void setAbsent(ArrayList<Attendance> absent) {
         this.absent = absent;
     }*/
+    
+    public int getCourseTerm() {
+        return courseTerm;
+    }
+
+    public void setCourseTerm(int courseTerm) {
+        this.courseTerm = courseTerm;
+    }
+    
     public String getCourseCode() {
         return courseCode;
     }
