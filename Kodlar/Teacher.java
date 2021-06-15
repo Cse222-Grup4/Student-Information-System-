@@ -2,21 +2,40 @@ import java.util.ArrayList;
 
 public class Teacher extends Person {
     private DataBase database;
-    private ArrayList<Course> courses;
+    private SkipList<Course> courses;
 
     Teacher(String mail,String password,DataBase db)
     {
         super(mail,password);
         database = db;
-        courses = new ArrayList<>();
+        courses = new SkipList<>();
     }
 
     Teacher(String mail,String password,String name,String surname,int id,DataBase db)
     {
         super(mail, password, name, surname, id);
         database = db;
-        courses = new ArrayList<>();
+        courses = new SkipList<>();
     }
+    
+    public ArrayList<String> getCourseIDs(){
+        ArrayList<String> courseIDs = new ArrayList<>();
+
+        for (Course course : courses) {
+            courseIDs.add(course.getCourseCode());
+        }
+
+       /*
+        Iterator<Course> iterator = courses.iterator();
+        while(iterator.hasNext()){
+            courseIDs.add(iterator.next().getCourseCode());
+        }
+        */
+
+        return courseIDs;
+    }
+    
+    
 
     public void viewAllGrades(ArrayList<Student> students)
     {
@@ -50,4 +69,3 @@ public class Teacher extends Person {
     }
     
 }
-//
