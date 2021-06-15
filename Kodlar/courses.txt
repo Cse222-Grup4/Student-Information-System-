@@ -1,0 +1,4 @@
+courseTerm;courseCode;courseName;credit
+8;CSE101;Bilgisayara Giris;9
+7;CSE102;C Programlama;7
+5;CSE222;Data Structures;8
