@@ -4,8 +4,8 @@ public class AdvisorTeacher extends Teacher {
 
 	private BinarySearchTree<Student> students;
 	
-	AdvisorTeacher(String mail, String password) {
-		super(mail, password);
+	AdvisorTeacher(String mail, String password,DataBase db) {
+		super(mail, password,db);
 		students= new BinarySearchTree<>();
 	}
 	
