@@ -47,9 +47,10 @@ public class Officer extends Person {
   public Student inquireStudentInformation(ArrayList < Student > students, int studentID) {
     
     for (int i = 0; i < students.size(); i++) {
-      if (students.get(i).getID() == studentID)
+      if (students.get(i).getUserID() == studentID)
         return students.get(i);
     }
+    return null;
   }
 
   /**
@@ -59,7 +60,7 @@ public class Officer extends Person {
    */
   public void viewTranscript(ArrayList < Student > students, int studentID) {
     for (int i = 0; i < students.size(); i++) {
-      if (students.get(i).getID() == studentID){
+      if (students.get(i).getUserID() == studentID){
         students.get(i).viewTranscript();
         break;
       }
