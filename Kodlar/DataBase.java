@@ -13,6 +13,7 @@ public class DataBase {
     private ArrayList<Student> students;
     private ArrayList<Teacher> teachers;
     private ArrayList<Officer> officers;
+    private ArrayList<Course> courses;
     private Queue<Event> events;
     private ArrayList<Curriculum> curriculums;
     private String teachersFilePath = "teachers.txt";
@@ -27,7 +28,7 @@ public class DataBase {
             students = new ArrayList<>();
             teachers = new ArrayList<>();
             officers = new ArrayList<>();
-         //   courseStudents = new HashMap<>();
+            courses = new ArrayList<>();
             events = new LinkedList<>();
             curriculums = new ArrayList<>();
             readUsersFile();
