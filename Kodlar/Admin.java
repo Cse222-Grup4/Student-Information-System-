@@ -24,9 +24,10 @@ public class Admin extends Officer{
 	*/
 	public Teacher inquireTeacherInformation(ArrayList <Teacher> teachers, int teacherID) {
 		for (int i = 0; i < teachers.size(); i++) {
-			if (teachers.get(i).getID() == teacherID)
+			if (teachers.get(i).getUserID() == teacherID)
 				return teachers.get(i);
 		}
+		return null;
 	}
 
 	/**
@@ -36,10 +37,11 @@ public class Admin extends Officer{
 		* @return Officer object
 	*/
 	public Officer inquireOfficerInformation(ArrayList < Officer > officers, int officerID) {
-		for (int i = 0; i < officersofficersofficers.size(); i++) {
-			if (officersofficers.get(i).getID() == teacherID)
+		for (int i = 0; i < officers.size(); i++) {
+			if (officers.get(i).getUserID() == officerID)
 				return officers.get(i);
 		}
+		return null;
 	}
 
 	public boolean addTeacher(ArrayList < Teacher > teachers , Teacher newTeacher){
