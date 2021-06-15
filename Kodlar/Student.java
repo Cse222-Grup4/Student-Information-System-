@@ -256,7 +256,7 @@ public class Student extends Person implements Comparable<Student>{
         
     @Override
     public int compareTo(Student o) {
-        return Integer.compare(getUserID(),other.getUserID());
+        return Integer.compare(getUserID(),o.getUserID());
     }
 
 }
