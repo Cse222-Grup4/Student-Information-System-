@@ -1,10 +1,6 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -31,7 +27,8 @@ public class DataBase {
             courses = new ArrayList<>();
             events = new LinkedList<>();
             curriculums = new ArrayList<>();
-            readUsersFile();
+            //readUsersFile();
+            readTeachersFile();
         }catch(IOException io){
             System.out.println("IOException occurred when reading 'teachers.txt' file.The exception is printing: ");
             io.printStackTrace();
