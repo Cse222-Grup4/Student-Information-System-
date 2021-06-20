@@ -10,7 +10,12 @@ public class Course implements Comparable<Course>  {
     private ArrayList<Student> students;
 
     private final int TotalCourses = 30;
-   
+
+
+    public int getTotalCourses()
+    {
+        return TotalCourses;
+    }
     /*private int numOfAttendance = 0;
     private int numOfAbsent = 0;
     private boolean ísPass = false;
@@ -78,6 +83,25 @@ public class Course implements Comparable<Course>  {
         this.numOfAbsent = numOfAbsent;
     }*/
 
+    public String getLetterGrade(int totalGrade)
+    {
+        if (totalGrade < 55)
+            return "FF";
+        else if (55 <= totalGrade && totalGrade <= 60)
+            return "DD";
+        else if (60 < totalGrade && totalGrade <= 65)
+            return "DC";
+        else if (65 < totalGrade && totalGrade <= 70)
+            return "CC";
+        else if (70 < totalGrade && totalGrade <= 75)
+            return "CB";
+        else if (75 < totalGrade && totalGrade <= 80)
+            return "BB";
+        else if (80 < totalGrade && totalGrade <= 85)
+            return "BA";
+        else
+            return "AA";
+    }
     public String getLetterGrade(int totalGrade, int numOfAbsent)
     {
         double ratio = (double)numOfAbsent / TotalCourses;
@@ -103,7 +127,7 @@ public class Course implements Comparable<Course>  {
             return "AA";
     }
 
-    /*                                      // artık öğrenciyi bulup yapması lazım
+    /*// artık öğrenciyi bulup yapması lazım
     public void addGrade(int grade,int type){
         switch (type){
             case 1 -> this.grade.setMidtermGrade(grade);
