@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.*;
 
+/*
+do:
+    CSE.TXT dosyasi => BILAL
+    students.txt dosyasi => berkcan
+
+ */
 public class Student extends Person implements Comparable<Student>{
     private int advisorTeacherID;
     private int entryYear;
@@ -9,6 +15,7 @@ public class Student extends Person implements Comparable<Student>{
     private boolean courseSelectionApprove;
     private ArrayList<Course> currentCourses;
     private ArrayList<ArrayList<Course>> pastCourses;
+
     private HashMap<String, Integer> Attendance;
     private HashMap<String, Grade> Grades;
     private PriorityQueue<Event> eventsToJoin = new PriorityQueue(new Date.EventComparator());
@@ -26,6 +33,7 @@ public class Student extends Person implements Comparable<Student>{
         super(mail, password, name, surname, id);
         currentCourses = new ArrayList<>();
         pastCourses = new ArrayList<ArrayList<Course>>();
+
         entryYear = year;
         Grades = new HashMap();
         Attendance = new HashMap<String, Integer>();
@@ -97,7 +105,9 @@ public class Student extends Person implements Comparable<Student>{
     {
         this.currentCourses = currentCourses;
     }
-    public int getEntryYear(){
+
+    public int getEntryYear()
+    {
         return entryYear;
     }
 
@@ -113,6 +123,47 @@ public class Student extends Person implements Comparable<Student>{
         eventsToJoin.add(e);
     }
 
+    public void menu()
+    {
+        for (;;) {
+            System.out.println("WELCOME TO STUDENT MENU");
+            System.out.println("0) Exit");
+            System.out.println("1) viewTranscript method");
+            System.out.println("2) viewGrades method");
+            System.out.println("3) viewCourseGrade method");
+            System.out.println("4) viewCurriculum method");
+            System.out.println("5) viewAttendance method");
+            // etkinlik ekle
+            // etkinlik goruntule
+
+
+            Scanner kb = new Scanner(System.in);
+            int choice = Integer.parseInt(kb.nextLine());
+
+            switch (choice) {
+                case 0:
+                    return;
+                case 1:
+                    viewTranscript();
+                    break;
+                case 2:
+                    viewGrades();
+                    break;
+                case 3:
+                    System.out.println("Ders kodu: ");
+                    viewCourseGrades(kb.nextLine());
+                    break;
+                case 4:
+                    viewCurriculum();
+                    break;
+                case 5:
+                    viewAttendance();
+                    break;
+                default:
+                    System.out.println("Tekrar giris");
+            }
+        }
+    }
 
     public void viewTranscript()
     {
@@ -122,7 +173,18 @@ public class Student extends Person implements Comparable<Student>{
         System.out.println("ID: " + this.getUserID());
         System.out.println("Department: " + getDepartment());
         System.out.println("Register Date: " + entryYear);
-        System.out.println("Advisor Teacher: " + getAdvisorTeacherID());
+        System.out.println("Advisor Teacher ID: " + getAdvisorTeacherID());
+
+        for (int i = 0; i < currentCourses.size(); ++i) {
+            Course c = currentCourses.get(i);
+            System.out.printf("Course code: %s | Course name: %s | Course credit: %d | Grade: %s%n", c.getCourseCode(),
+                                                                                                     c.getCourseName(),
+                                                                                                     c.getCredit(),
+                                                                                                     c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade(),
+                                                                                                     Attendance.get(currentCourses.get(i).getCourseCode())));
+
+        }
+
 
         for (int i = 0; i < pastCourses.size(); ++i) {
             if (i % 2 == 0)
@@ -132,10 +194,10 @@ public class Student extends Person implements Comparable<Student>{
 
             for (int k = 0; k < pastCourses.get(i).size(); ++k) {
                 Course c = pastCourses.get(i).get(k);
-                System.out.printf("Course code: %d | Course name: %s | Course credit: %d | Grade: %s%n", c.getCourseCode(),
+                System.out.printf("Course code: %s | Course name: %s | Course credit: %d | Grade: %s%n", c.getCourseCode(),
                                                                                                          c.getCourseName(),
                                                                                                          c.getCredit(),
-                                                                                                         c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade(), Attendance.get(currentCourses.get(i).getCourseCode())));
+                                                                                                         c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getPastTotalGrade()));
             }
         }
     }
@@ -143,7 +205,12 @@ public class Student extends Person implements Comparable<Student>{
     public void viewGrades()
     {
         for (int i = 0; i < currentCourses.size(); ++i)
-            System.out.print(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade());
+            System.out.println("Name: " + currentCourses.get(i).getCourseName() +
+                               "Code: " + currentCourses.get(i).getCourseCode() +
+                               "Midterm: " + Grades.get(currentCourses.get(i).getCourseCode()).getMidtermGrade() +
+                               "Final: " + Grades.get(currentCourses.get(i).getCourseCode()).getFinalGrade() +
+                               "Project: " + Grades.get(currentCourses.get(i).getCourseCode()).getProjectGrade() +
+                               "Total Grade: " + Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade());
             //System.out.println(Grades.get(currentCourses.get(i));
     }
     
@@ -155,18 +222,16 @@ public class Student extends Person implements Comparable<Student>{
             System.out.println(Grades.get(courseCode));
     }
 
-    public void viewAttandance()
+    public void viewAttendance()
     {
         for (int i = 0; i < currentCourses.size(); ++i) {
             Course c = currentCourses.get(i);
             System.out.println("Course name: " + c.getCourseName());
-            //System.out.println("Total number of courses " + c.getNumOfAttendance());
-            //System.out.println("Number of absent day: " + c.getNumOfAbsent());
+            System.out.println("Total number of courses " + c.getTotalCourses());
+            System.out.println("Number of absent day: " + Attendance.get(c.getCourseCode()));
 
-           // for (int k = 0; k < c.getAbsent().size(); ++k)
-           //     System.out.println("  Date: " + c.getAbsent().get(k).getDate());
-
-            if (c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade(), Attendance.get(currentCourses.get(i).getCourseCode())).equals("NA"))
+            if (c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade(),
+                    Attendance.get(currentCourses.get(i).getCourseCode())).equals("NA"))
                 System.out.println("Currently your grade is NA. You should attend your classes if you want to pass..");
         }
     }
@@ -174,7 +239,7 @@ public class Student extends Person implements Comparable<Student>{
     public void viewCurriculum()
     {
         try {
-            FileReader myObj = new FileReader("src/plan.txt");
+            FileReader myObj = new FileReader("src/" + getDepartment() + ".txt");
             BufferedReader myReader = new BufferedReader(myObj);
             while (myReader.ready()){
                 System.out.println(myReader.readLine());
@@ -253,6 +318,51 @@ public class Student extends Person implements Comparable<Student>{
     @Override
     public int compareTo(Student o) {
         return Integer.compare(getUserID(),o.getUserID());
+    }
+
+    public String toString()
+    {
+        return "isim: " + getUserName() + " soyisim: " + getUserSurname() + " mail: " +
+            getUserMail() + " sifre: " + getUserPassword() + " user id: " + getUserID()
+            + " advisor id: " + getAdvisorTeacherID() + " department: "  + getDepartment()
+            + " term: " + getTerm() + " ders durumu: " + getCourseSelectionApprove();
+    }
+
+    public String studentToFile()
+    {
+
+        String s =  getUserName() + ";" + getUserSurname() + ";" + getUserMail() + ";" + getUserPassword()
+                + ";" + getUserID() + ";" + getAdvisorTeacherID() + ";" + getEntryYear() + ";" +
+                getTerm() + ";" + getDepartment() + ";" + getCourseSelectionApprove() + ";";
+        StringBuilder sb = new StringBuilder();
+        sb.append(s);
+
+        for (int i = 0; i < currentCourses.size(); ++i) {
+            sb.append(currentCourses.get(i).getCourseCode()).append('.');
+            sb.append(Attendance.get(currentCourses.get(i).getCourseCode())).append('.');
+            sb.append(Grades.get(currentCourses.get(i).getCourseCode()).getMidtermGrade()).append('.');
+            sb.append(Grades.get(currentCourses.get(i).getCourseCode()).getFinalGrade()).append('.');
+            sb.append(Grades.get(currentCourses.get(i).getCourseCode()).getProjectGrade());
+            if (i == currentCourses.size() - 1)
+                sb.append(';');
+            else
+                sb.append(',');
+        }
+
+        for (int i = 0; i < pastCourses.size(); ++i) {
+            for (int k = 0; k < pastCourses.get(i).size(); ++k) {
+                sb.append(pastCourses.get(i).get(k).getCourseCode()).append('.').append(Grades.get(pastCourses.get(i).get(k).getCourseCode()).getPastTotalGrade());
+
+                // sondaki iki nokta iyilestirilecek
+                if (k == pastCourses.get(i).size() - 1)
+                    sb.append(':');
+                else
+                    sb.append(',');
+            }
+
+        }
+
+        return sb.toString();
     }
 
 }
