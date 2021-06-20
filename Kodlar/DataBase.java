@@ -19,7 +19,8 @@ public class DataBase {
    // private HashMap <String,ArrayList<Student>> courseStudents;
 
 
-    DataBase() throws IOException{
+    DataBase() throws IOException
+    {
         try{
             students = new ArrayList<>();
             teachers = new ArrayList<>();
@@ -27,9 +28,13 @@ public class DataBase {
             courses = new ArrayList<>();
             events = new LinkedList<>();
             curriculums = new ArrayList<>();
-            //readUsersFile();
+
+            readCourses("src/courses.txt");
             readTeachersFile();
-        }catch(IOException io){
+            //readStudentFile();
+            //readUsersFile(); silinmis
+
+        } catch(IOException io){
             System.out.println("IOException occurred when reading 'teachers.txt' file.The exception is printing: ");
             io.printStackTrace();
             throw io;
@@ -185,11 +190,41 @@ public class DataBase {
         }
         return true;
     }
+    public void printStudents()
+    {
+        System.out.println(students.get(0).studentToFile());
 
+        for (int i = 0; i < students.size(); ++i) {
+            System.out.println(students.get(i).toString());
+            for (int k = 0; k < students.get(i).getPastCourses().size(); ++k)
+                for (int j = 0; j < students.get(i).getPastCourses().get(k).size(); ++j)
+                    System.out.printf("%s\n",students.get(i).getPastCourses().get(k).get(j).toString());
+        }
+    }
+
+
+    public boolean writeStudentFile()
+    {
+        try {
+            FileWriter file = new FileWriter("src/students.txt");
+
+
+            for (int i = 0; i < students.size(); ++i) {
+                file.write(students.get(i).studentToFile());
+                file.write('\n');
+            }
+
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
     public boolean readStudentFile(){
         // reader for read teachers file
         try{
-            FileReader myObj = new FileReader("students.txt");
+            FileReader myObj = new FileReader("src/students.txt");
             BufferedReader bufferedReader = new BufferedReader(myObj);
 
             String line;
@@ -205,10 +240,11 @@ public class DataBase {
                 tempStudent.setDepartment(parts[8]);
                 tempStudent.setCourseSelectionApprove(Boolean.parseBoolean(parts[9]));
                 String tempCourses[] = parts[10].split(",");
+
                 for(int i = 0;i < tempCourses.length;i++){
                     String tempCurrentCourse[] = tempCourses[i].split("\\.");
                     for(int j = 0;j < courses.size();j++){
-                        if(courses.get(j).getCourseCode().equals(tempCurrentCourse[i])){
+                        if(courses.get(j).getCourseCode().equals(tempCurrentCourse[0])){
                             tempStudent.getCurrentCourses().add(courses.get(j));
                             break;
                         }
@@ -223,24 +259,27 @@ public class DataBase {
                 tempCourses = parts[11].split(":");
                 for(int i = 0;i < tempCourses.length;i++){
                     String tempCurrentCourses[] = tempCourses[i].split(",");
-
+                    ArrayList<Course> t_arr = new ArrayList<Course>();
                     for(int t = 0;t < tempCurrentCourses.length;t++){
                         String tempCurrentCourse[] = tempCurrentCourses[t].split("\\.");
+
                         for(int j = 0;j < courses.size();j++){
-                            if(courses.get(j).getCourseCode().equals(tempCurrentCourse[0])){
-                                tempStudent.getPastCourses().get(i).add(courses.get(j));
+                            if(courses.get(j).getCourseCode().equals(tempCurrentCourse[0])) {
+                                t_arr.add(courses.get(j));
+                                //tempStudent.getPastCourses().get(i).add(courses.get(j));
                                 tempStudent.getGrades().put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[1])));
                                 break;
                             }
                         }
                     }
+                    tempStudent.getPastCourses().add(t_arr);
                 }
                 students.add(tempStudent);
             }
             bufferedReader.close();
             myObj.close();
         }catch(IOException io){
-        System.out.println("IOException occurred when reading 'teachers.txt' file.The exception is printing: ");
+        System.out.println("IOException occurred when reading 'student.txt' file.The exception is printing: ");
         io.printStackTrace();
         }
         return true;
@@ -258,9 +297,4 @@ public class DataBase {
         }
         return null;
     }
-
-
-
-
-
 }
