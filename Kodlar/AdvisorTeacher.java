@@ -56,5 +56,57 @@ public class AdvisorTeacher extends Teacher {
     		displayStudents(students.getRightSubtree());
     	}
     }
+	private void showMenu() {
+    	for (int i = 0; i < 45; i++) System.out.print("-");
+			System.out.print("\n"+"   ");
+		System.out.println("Welcome Teacher " + getUserName() + getUserSurname());
+		System.out.println("What do you want to do?");
+		System.out.println("1) View Students.\n2) View Student's Selected Course\n3) Approve Course Selection\n0) Exit");
+    }
+    public void advisorTeacherMenu() {
+    	Scanner input = new Scanner(System.in);
+    	int selection = 1,id,confirmation;
+    	while(selection != 0) {
+    		showMenu();
+    		selection = input.nextInt();
+    		switch (selection) {
+    			case 1:
+    				viewStudents();
+    				break;
+    			case 2:
+    				System.out.println("Enter the ID of student: ");
+    				id = input.nextInt();
+    				if(getStudent(id,students) == null) {
+    					System.out.println("Student couldn't found");
+    				}
+    				else {
+    					displaySelectedCourses(id);
+    				}
+    				break;
+    			case 3:
+    				System.out.println("Enter the ID of student: ");
+    				id = input.nextInt();
+    				if(getStudent(id,students) == null) {
+    					System.out.println("Student couldn't found");
+    				}
+    				else {
+    					System.out.println("Do you want to approve?(1-Yes, 0-No)");
+    					confirmation = input.nextInt();
+    					if(confirmation != 0 || confirmation != 1) {
+    						System.out.println("Wrong Input!");
+    					}
+    					else {
+    						approveCourseSelection(id, confirmation == 1);
+    					}
+    				}
+    				break;
+    			case 0:
+    				break;
+    			default:
+    				System.out.println("Wrong Selection");
+    				break;
+    		}
+    	}
+    }
 
 }
