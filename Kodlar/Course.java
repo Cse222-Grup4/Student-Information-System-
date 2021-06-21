@@ -69,7 +69,12 @@ public class Course implements Comparable<Course>  {
     }
     public void setCredit(int credit) {
         this.credit = credit;
-    }/*
+    }
+    
+    public ArrayList<Student> getStudents(){
+        return students;
+    }
+    /*
     public int getNumOfAttendance() {
         return numOfAttendance;
     }
