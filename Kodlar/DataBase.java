@@ -297,4 +297,14 @@ public class DataBase {
         }
         return null;
     }
+    
+    public Student findStudentWID(int ID){
+        for (Student student : students) {
+            if (student.getUserID() == ID)
+                return student;
+        }
+        return null;
+    }
+
+    
 }
