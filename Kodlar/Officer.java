@@ -14,8 +14,8 @@ public class Officer extends Person {
    * @param password Officer's account password.
    * @param ID Officer ID number.
    */
-  private Database db;
-  Officer(String name, String surname, String mail, String password, int ID,Database db) {
+  private DataBase db;
+  Officer(String name, String surname, String mail, String password, int ID,DataBase db) {
     super(mail, password, name, surname, ID);
     this.db=db;
     db.addOfficer(this);
