@@ -7,11 +7,13 @@ public class AdvisorTeacher extends Teacher {
 	AdvisorTeacher(String mail, String password,String department,DataBase db) {
 		super(mail, password,department,db);
 		students= new BinarySearchTree<>();
+		setIsAdvisor(true);
 	}
 
 	AdvisorTeacher(String mail,String password,String name,String surname,int id,String department,DataBase db) {
 		super(mail, password, name, surname, id,department,db);
 		students= new BinarySearchTree<>();
+		setIsAdvisor(true);
 	}
 	
     public void approveCourseSelection(int studentID,boolean confirmation){
