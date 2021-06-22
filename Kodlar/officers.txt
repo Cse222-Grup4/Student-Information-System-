@@ -1,0 +1,4 @@
+id;mail;password;name;surname
+1111;a@gtu.edu.tr;abc;Ahmet;Ahmet
+2222;s@gtu.edu.tr;123;Samet;Samet
+3333;sd@gtu.edu.tr;qwe;Serdil;Serdil
