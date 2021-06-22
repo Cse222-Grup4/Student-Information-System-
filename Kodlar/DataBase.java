@@ -56,7 +56,8 @@ public class DataBase {
     				line.split(";")[1],
     				line.split(";")[2],
     				line.split(";")[3],
-    				Integer.parseInt(line.split(";")[4])
+    				Integer.parseInt(line.split(";")[4]),
+                    this
     				));
     	}
     }
