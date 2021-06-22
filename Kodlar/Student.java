@@ -5,7 +5,7 @@ import java.util.*;
 do:
     CSE.TXT dosyasi => BILAL
     students.txt dosyasi => berkcan
-    kurs sinifindaki array list doldurulacak.
+    officier menu database - student ctor
 */
 
 public class Student extends Person implements Comparable<Student> {
@@ -203,12 +203,15 @@ public class Student extends Person implements Comparable<Student> {
                     courseSelection();
                     break;
                 case 7:
-                    showEvents();
+                    System.out.println("Enter event");
+                    String eventOrder = kb.nextLine();
+                    // enter description
+                    // enter date
+                    // Event = new Event(name, description, date);
+                    addEvent(eventOrder);
                     break;
                 case 8:
-                    System.out.println("Enter event");
-                    String eventOrder = input.nextLine();
-                    addEvent(eventOrder);
+                    showEvents();
                     break;
                 default:
                     System.out.println("Try Again!");
@@ -351,29 +354,38 @@ public class Student extends Person implements Comparable<Student> {
         courseSelectionApprove = false;
     }
 
-    public void addEvent(String eventOrder) throws IOException{
+    public void addEvent(String eventOrder)
+    {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/events.txt",true));
+            writer.write("\n"+eventOrder+"\n");
+            writer.write("NOT CHECKED");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter("events.txt",true));
-        writer.write("\n"+eventOrder+"\n");
-        writer.write("NOT CHECKED");
-        writer.close();
 
     }
 
-    public void showEvents()throws IOException
+    public void showEvents()
     {
 
         Queue<String>record = new LinkedList<String>();
         String line = "";
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/events.txt"));
+            br.readLine();
 
-        BufferedReader br = new BufferedReader(new FileReader("events.txt"));
+            while((line = br.readLine()) != null)
+                record.add(line + "\n");
 
-        br.readLine();
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        while((line = br.readLine()) != null)
-            record.add(line + "\n");
-
-        br.close();
 
         System.out.println(record);
     }
