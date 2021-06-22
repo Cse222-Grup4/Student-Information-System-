@@ -132,11 +132,11 @@ public class DataBase {
     	
     	while ((line = br.readLine()) != null) {
     		officers.add(new Officer(
-    				line.split(";")[0],
+    				line.split(";")[3],
+    				line.split(";")[4],
     				line.split(";")[1],
     				line.split(";")[2],
-    				line.split(";")[3],
-    				Integer.parseInt(line.split(";")[4]),
+    				Integer.parseInt(line.split(";")[0]),
                     this
     				));
     	}
@@ -150,11 +150,11 @@ public class DataBase {
     public void exportOfficerToFile(Officer o) throws IOException {
     	// Appends end of file
         BufferedWriter writer = new BufferedWriter(new FileWriter(officersFilePath,true));
+        writer.write(o.getUserID() + ";");
         writer.write(o.getUserMail() + ";");
         writer.write(o.getUserPassword() + ";");
         writer.write(o.getUserName() + ";");
-        writer.write(o.getUserSurname() + ";");
-        writer.write(o.getUserID() + "\n");
+        writer.write(o.getUserSurname() + "\n");
         writer.close();    	
     }
     
@@ -167,11 +167,12 @@ public class DataBase {
     	
     	for(int i=0; i<officers.size(); i++)
     	{
-    		writer.write(officers.get(i).getUserMail() + ";");
+    		writer.write(officers.get(i).getUserID() + ";");
+            writer.write(officers.get(i).getUserMail() + ";");
     		writer.write(officers.get(i).getUserPassword() + ";");
     		writer.write(officers.get(i).getUserName() + ";");
-    		writer.write(officers.get(i).getUserSurname() + ";");
-    		writer.write(officers.get(i).getUserID() + "\n");
+    		writer.write(officers.get(i).getUserSurname() + "\n");
+    		
     	}
     	writer.close();
     }
