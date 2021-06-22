@@ -295,13 +295,20 @@ public class DataBase {
                     }
                     tempStudent.getPastCourses().add(t_arr);
                 }
+                tempStudent.setDb(this);
                 students.add(tempStudent);
             }
+
+            for (int i = 0; i < students.size(); ++i)
+                for (int k = 0; k < students.get(i).getCurrentCourses().size(); ++k)
+                    students.get(i).getCurrentCourses().get(k).addStudent(students.get(i));
+
             bufferedReader.close();
             myObj.close();
-        }catch(IOException io){
-        System.out.println("IOException occurred when reading 'student.txt' file.The exception is printing: ");
-        io.printStackTrace();
+
+        } catch(IOException io) {
+            System.out.println("IOException occurred when reading 'student.txt' file.The exception is printing: ");
+            io.printStackTrace();
         }
         return true;
     }
