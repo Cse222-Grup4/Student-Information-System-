@@ -7,19 +7,25 @@ public class Course implements Comparable<Course>  {
     private String courseCode;
     private String courseName;
     private int credit;
-    private ArrayList<Student> students;
-
+    private ArrayList<Student> students = new ArrayList<>();
     private final int TotalCourses = 30;
 
+        /*private int numOfAttendance = 0;
+    private int numOfAbsent = 0;
+    private boolean ísPass = false;
+    */
+
+    public void printCourseStudents()
+    {
+        System.out.println("size: " + students.size());
+        for (int i= 0; i < students.size(); ++i)
+            System.out.println(students.get(i));
+    }
 
     public int getTotalCourses()
     {
         return TotalCourses;
     }
-    /*private int numOfAttendance = 0;
-    private int numOfAbsent = 0;
-    private boolean ísPass = false;
-    */
 
     public Course(int courseTerm, String courseCode, String courseName, int credit) {
         this.courseCode = courseCode;
@@ -29,6 +35,12 @@ public class Course implements Comparable<Course>  {
         /*absent = new ArrayList<>();
         grade = new Grade();*/
     }
+
+    public void addStudent(Student s)
+    {
+        students.add(s);
+    }
+
 /*
     public Grade getGrade() {
         return grade;
@@ -69,12 +81,7 @@ public class Course implements Comparable<Course>  {
     }
     public void setCredit(int credit) {
         this.credit = credit;
-    }
-    
-    public ArrayList<Student> getStudents(){
-        return students;
-    }
-    /*
+    }/*
     public int getNumOfAttendance() {
         return numOfAttendance;
     }
