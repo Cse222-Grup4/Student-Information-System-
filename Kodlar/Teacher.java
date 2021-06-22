@@ -175,9 +175,7 @@ public class Teacher extends Person {
                  System.out.println("The course couldn't found.");
                  return;
              }
-            ArrayList<Student> tempStudents =  tempCourse.getStudents();
-            for (Student tempStudent : tempStudents)
-                tempStudent.viewCourseGrades(tempCourse.getCourseCode());
+            viewAllGrades(tempCourse.getStudents(), tempCourse.getCourseCode());
         }
     }
 
