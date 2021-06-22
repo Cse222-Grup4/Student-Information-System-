@@ -135,11 +135,11 @@ public class Admin extends Officer{
 						case 2:
 							System.out.println("Enter year");
 							year = Integer.parseInt(scanner.nextLine());
-							Student tempO = new Student(mail, password, name, surname, id, year);
+							Student tempS = new Student(mail, password, name, surname, id, year);
 							//add database the student.
 						break;
 						case 3:
-							Admin tempO = new Admin(name, surname, mail, password, id,db);
+							Admin tempA = new Admin(name, surname, mail, password, id,db);
 							//add database the Admin.
 						break;
 						default:
