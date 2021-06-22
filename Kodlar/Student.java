@@ -171,6 +171,8 @@ public class Student extends Person implements Comparable<Student> {
             System.out.println("4) View Curriculum");
             System.out.println("5) View Attendances");
             System.out.println("6) Select Courses");
+            System.out.println("7) Add Event");
+            System.out.println("8) Show Event");
             // etkinlik ekle
             // etkinlik goruntule
 
@@ -199,6 +201,13 @@ public class Student extends Person implements Comparable<Student> {
                     break;
                 case 6:
                     courseSelection();
+                    break;
+                case 7:
+                    showEvents();
+                    break;
+                case 8:
+                    String eventOrder;
+                    addEvent(eventOrder);
                     break;
                 default:
                     System.out.println("Try Again!");
