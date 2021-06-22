@@ -10,6 +10,7 @@ public class Teacher extends Person {
     private final DataBase database;
     private SkipList<Course> courses;
     private String department;
+    private boolean isAdvisor;
 
     static final Scanner input = new Scanner(System.in);
 
@@ -19,6 +20,7 @@ public class Teacher extends Person {
         database = db;
         courses = new SkipList<>();
         this.department = department;
+        isAdvisor = false;
     }
 
     Teacher(String mail,String password,String name,String surname,int id,String department,DataBase db)
@@ -27,6 +29,7 @@ public class Teacher extends Person {
         database = db;
         courses = new SkipList<>();
         this.department = department;
+        isAdvisor = false;
     }
 
     public String getDepartment() {
@@ -35,6 +38,16 @@ public class Teacher extends Person {
     public void setDepartment(String department) {
         this.department = department;
     }
+    
+    public void setIsAdvisor(boolean advisor) {
+        isAdvisor = advisor;
+    }
+    public boolean getIsAdvisor() {
+       return isAdvisor;
+    }
+
+    
+    
 
     public ArrayList<String> getCourseIDs(){
         ArrayList<String> courseIDs = new ArrayList<>();
