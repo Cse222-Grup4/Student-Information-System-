@@ -187,7 +187,7 @@ public class DataBase {
         bufferedWriter.close();
     }
     
-    private Course findCourseWID(String courseID) {
+    public Course findCourseWID(String courseID) {
         for (Course course : courses) {
             if (course.getCourseCode().equals(courseID))
                 return course;
