@@ -4,8 +4,13 @@ public class AdvisorTeacher extends Teacher {
 
 	private BinarySearchTree<Student> students;
 	
-	AdvisorTeacher(String mail, String password,DataBase db) {
-		super(mail, password,db);
+	AdvisorTeacher(String mail, String password,String department,DataBase db) {
+		super(mail, password,department,db);
+		students= new BinarySearchTree<>();
+	}
+
+	AdvisorTeacher(String mail,String password,String name,String surname,int id,String department,DataBase db) {
+		super(mail, password, name, surname, id,department,db);
 		students= new BinarySearchTree<>();
 	}
 	
@@ -63,7 +68,7 @@ public class AdvisorTeacher extends Teacher {
 		System.out.println("What do you want to do?");
 		System.out.println("1) View Students.\n2) View Student's Selected Course\n3) Approve Course Selection\n0) Exit");
     }
-    public void advisorTeacherMenu() {
+    public void performTasks() {
     	Scanner input = new Scanner(System.in);
     	int selection = 1,id,confirmation;
     	while(selection != 0) {
