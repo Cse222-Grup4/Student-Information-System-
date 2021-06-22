@@ -99,7 +99,7 @@ public class AdvisorTeacher extends Teacher {
     				else {
     					System.out.println("Do you want to approve?(1-Yes, 0-No)");
     					confirmation = input.nextInt();
-    					if(confirmation != 0 || confirmation != 1) {
+    					if(confirmation != 0 && confirmation != 1) {
     						System.out.println("Wrong Input!");
     					}
     					else {
