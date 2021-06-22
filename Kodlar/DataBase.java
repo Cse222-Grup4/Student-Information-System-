@@ -12,6 +12,7 @@ public class DataBase {
     private ArrayList<Course> courses;
     private Queue<Event> events;
     private ArrayList<Curriculum> curriculums;
+    private Admin admin;
     private String teachersFilePath = "teachers.txt";
     private String officersFilePath = "officers.txt";
 
@@ -28,6 +29,7 @@ public class DataBase {
             courses = new ArrayList<>();
             events = new LinkedList<>();
             curriculums = new ArrayList<>();
+            admin = new Admin("admin","admin","admin@gtu.edu.tr","admin",this);
 
             readCourses("src/courses.txt");
             readTeachersFile();
@@ -40,6 +42,81 @@ public class DataBase {
             throw io;
         }
     }
+    
+    /**
+     * The menu for Application
+     */
+    public void initialMenu(){
+
+        try {
+            String inputLine;
+            int choice;
+
+            do {
+                System.out.println("\n---------------Welcome to the Student Information System Application---------------\n");
+                System.out.println("Please select:");
+                System.out.println("1-Sign In");
+                System.out.println("0-Exit");
+
+                inputLine = input.nextLine();
+                choice = Integer.parseInt(inputLine);
+
+                switch (choice) {
+                    case 1 -> signIn();
+                    case 0 -> System.out.println("Thanks for using Student Information System. Have a nice day!");
+                    default -> System.out.println("Please select from menu\n");
+                }
+            } while (choice != 0);
+        }catch (NumberFormatException nfe){
+            System.out.println("!You typed char instead of number!");
+            nfe.printStackTrace();
+        }
+    }
+
+    /**
+     * Log In to the system.
+     * @throws NumberFormatException  If the userID does not contain a parsable int.
+     */
+    private void signIn() throws NumberFormatException{
+        int inputUserID;
+
+        System.out.print("UserID:");
+        inputUserID = Integer.parseInt(input.nextLine());
+        System.out.print("Password:");
+        String inputPassword = input.nextLine();
+
+        for (Student student : students) {
+            if (student.getUserID() == inputUserID && student.getUserPassword().equals(inputPassword)){
+                student.menu();
+                return;
+            }
+        }
+
+        for (Teacher teacher : teachers) {
+            if (teacher.getUserID() == inputUserID && teacher.getUserPassword().equals(inputPassword)) {
+                teacher.performTasks();
+                return;
+            }
+        }
+        for (Officer officer : officers) {
+            if (officer.getUserID() == inputUserID && officer.getUserPassword().equals(inputPassword)) {
+                officer.menu();
+                return;
+            }
+        }
+        if (admin.getUserID() == inputUserID && admin.getUserPassword().equals(inputPassword)) {
+            admin.menu();
+            return;
+        }
+
+        System.out.println("Wrong ID or password.");
+
+    }
+    
+    
+    
+    
+    
     
     /**
      * Reads text file and adds officers into array list of officers.
