@@ -51,7 +51,7 @@ public class Officer extends Person {
     
     for (int i = 0; i < db.getStudents().size(); i++) {
       if (db.getStudents().get(i).getUserID() == studentID)
-        return students.get(i);
+        return db.getStudents().get(i);
     }
     return null;
   }
@@ -64,7 +64,7 @@ public class Officer extends Person {
   public void viewTranscript(int studentID) {
     for (int i = 0; i < db.getStudents().size(); i++) {
     	if (db.getStudents().get(i).getUserID() == studentID){
-        students.get(i).viewTranscript();
+        db.getStudents().get(i).viewTranscript();
         break;
       }
     }
