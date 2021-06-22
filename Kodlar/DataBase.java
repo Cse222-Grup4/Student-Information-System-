@@ -14,16 +14,16 @@ public class DataBase {
     private Queue<Event> events;
     private ArrayList<Curriculum> curriculums;
     private Admin admin;
-    private String teachersFilePath = "teachers.txt";
-    private String officersFilePath = "officers.txt";
+    private String teachersFilePath = "src/teachers.txt";
+    private String officersFilePath = "src/officers.txt";
 
 
-   // private HashMap <String,ArrayList<Student>> courseStudents;
+    // private HashMap <String,ArrayList<Student>> courseStudents;
 
     public ArrayList<Student> getStudents(){return students;}
     DataBase() throws IOException
     {
-        try{
+        try {
             students = new ArrayList<>();
             teachers = new ArrayList<>();
             officers = new ArrayList<>();
@@ -34,8 +34,11 @@ public class DataBase {
 
             readCourses("src/courses.txt");
             readTeachersFile();
-            //readStudentFile();
+            readStudentFile();
+            importOfficersFromFile();
             //readUsersFile(); silinmis
+
+            //writeStudentFile();
 
         } catch(IOException io){
             System.out.println("IOException occurred when reading 'teachers.txt' file.The exception is printing: ");
@@ -43,7 +46,7 @@ public class DataBase {
             throw io;
         }
     }
-    
+
     /**
      * The menu for Application
      */
@@ -115,80 +118,80 @@ public class DataBase {
         System.out.println("Wrong ID or password.");
 
     }
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     /**
      * Reads text file and adds officers into array list of officers.
      * @throws NumberFormatException If Officer's ID is not a valid number
      * @throws IOException If text file is not found
      */
     public void importOfficersFromFile() throws NumberFormatException, IOException {
-    	String line;
-    	BufferedReader br = new BufferedReader(new FileReader(officersFilePath));
-    	
-    	while ((line = br.readLine()) != null) {
-    		officers.add(new Officer(
-    				line.split(";")[3],
-    				line.split(";")[4],
-    				line.split(";")[1],
-    				line.split(";")[2],
-    				Integer.parseInt(line.split(";")[0]),
+        String line;
+        BufferedReader br = new BufferedReader(new FileReader(officersFilePath));
+
+        while ((line = br.readLine()) != null) {
+            officers.add(new Officer(
+                    line.split(";")[3],
+                    line.split(";")[4],
+                    line.split(";")[1],
+                    line.split(";")[2],
+                    Integer.parseInt(line.split(";")[0]),
                     this
-    				));
-    	}
+            ));
+        }
     }
-    
+
     /**
      * Appends an officer to end of text file which is storing officers.
      * @param o Officer object
      * @throws IOException If creating file is failed
      */
     public void exportOfficerToFile(Officer o) throws IOException {
-    	// Appends end of file
+        // Appends end of file
         BufferedWriter writer = new BufferedWriter(new FileWriter(officersFilePath,true));
         writer.write(o.getUserID() + ";");
         writer.write(o.getUserMail() + ";");
         writer.write(o.getUserPassword() + ";");
         writer.write(o.getUserName() + ";");
         writer.write(o.getUserSurname() + "\n");
-        writer.close();    	
+        writer.close();
     }
-    
+
     /**
      * Writes all officers in list into the text file.
      * @throws IOException
      */
     public void exportOfficersList() throws IOException {
-    	BufferedWriter writer = new BufferedWriter(new FileWriter(officersFilePath));
-    	
-    	for(int i=0; i<officers.size(); i++)
-    	{
-    		writer.write(officers.get(i).getUserID() + ";");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(officersFilePath));
+
+        for(int i=0; i<officers.size(); i++)
+        {
+            writer.write(officers.get(i).getUserID() + ";");
             writer.write(officers.get(i).getUserMail() + ";");
-    		writer.write(officers.get(i).getUserPassword() + ";");
-    		writer.write(officers.get(i).getUserName() + ";");
-    		writer.write(officers.get(i).getUserSurname() + "\n");
-    		
-    	}
-    	writer.close();
+            writer.write(officers.get(i).getUserPassword() + ";");
+            writer.write(officers.get(i).getUserName() + ";");
+            writer.write(officers.get(i).getUserSurname() + "\n");
+
+        }
+        writer.close();
     }
-    
-    /** 
+
+    /**
      * Adds an officer to the list
      * @param o Officer object
      * @return Whether adding is successful
      */
     public boolean addOfficer(Officer o) {
-    	boolean b;
-    	b = officers.add(o);
-    	return b;
+        boolean b;
+        b = officers.add(o);
+        return b;
     }
 
-    
+
     private void readTeachersFile() throws IOException {
         // reader for read teachers file
         File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
@@ -236,7 +239,7 @@ public class DataBase {
         }
         bufferedReader.close();
     }
-    
+
     private void writeTeachersFile() throws IOException {
         // writer for read teachers file
         File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
@@ -268,7 +271,7 @@ public class DataBase {
         }
         bufferedWriter.close();
     }
-    
+
     public Course findCourseWID(String courseID) {
         for (Course course : courses) {
             if (course.getCourseCode().equals(courseID))
@@ -394,7 +397,7 @@ public class DataBase {
         }
         return true;
     }
-    
+
     public void displayTeachers(){
         for(Teacher t : teachers)
             System.out.println(t);
@@ -402,12 +405,12 @@ public class DataBase {
     public Curriculum getCurriculum(String department) {
         for(int i=0;i<curriculums.size();i++) {
             if(curriculums.get(i).getDepartment().equals(department)) {
-                 return curriculums.get(i);
+                return curriculums.get(i);
             }
         }
         return null;
     }
-    
+
     public Student findStudentWID(int ID){
         for (Student student : students) {
             if (student.getUserID() == ID)
@@ -416,15 +419,15 @@ public class DataBase {
         return null;
     }
     private void appendAdvisors() {
-    	for(int i=0;i<students.size();i++) {
-    		for(int j =0 ; j<teachers.size();j++) {
-    			if(students.get(i).getDepartment().equals(teachers.get(j).getDepartment()) && teachers.get(j).getIsAdvisor()) {
-    				AdvisorTeacher temp = (AdvisorTeacher)teachers.get(j);
-    				temp.getStudents().add(students.get(i));
-    				students.get(i).setAdvisorTeacherID(teachers.get(j).getUserID());
-    			}
-    		}
-    	}
+        for(int i=0;i<students.size();i++) {
+            for(int j =0 ; j<teachers.size();j++) {
+                if(students.get(i).getDepartment().equals(teachers.get(j).getDepartment()) && teachers.get(j).getIsAdvisor()) {
+                    AdvisorTeacher temp = (AdvisorTeacher)teachers.get(j);
+                    temp.getStudents().add(students.get(i));
+                    students.get(i).setAdvisorTeacherID(teachers.get(j).getUserID());
+                }
+            }
+        }
     }
-    
+
 }
