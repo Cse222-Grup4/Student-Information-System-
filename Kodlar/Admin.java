@@ -2,9 +2,12 @@ import java.util.*;
 import java.io.*;
 
 public class Admin extends Officer{
-	Admin(String name, String surname, String mail, String password, int ID) {
-		super(name, surname, mail, password, ID);
-		//TODO Auto-generated constructor stub
+	Admin(String name, String surname, String mail, String password, int ID,DataBase db) {
+		this.name=name;
+		this.surname=surname;
+		this.mail=mail;
+		this.password=password;
+		this.ID=ID;
 	}
 	/**
 	* Constructor with two parameters.
