@@ -5,9 +5,11 @@ import java.util.*;
 do:
     CSE.TXT dosyasi => BILAL
     students.txt dosyasi => berkcan
+    kurs sinifindaki array list doldurulacak.
+*/
 
- */
-public class Student extends Person implements Comparable<Student>{
+public class Student extends Person implements Comparable<Student> {
+    private DataBase db;
     private int advisorTeacherID;
     private int entryYear;
     private int term;
@@ -15,8 +17,7 @@ public class Student extends Person implements Comparable<Student>{
     private boolean courseSelectionApprove;
     private ArrayList<Course> currentCourses;
     private ArrayList<ArrayList<Course>> pastCourses;
-
-    private HashMap<String, Integer> Attendance;
+    private HashMap<String, Integer> Attendance;        // treeset treemap kullan
     private HashMap<String, Grade> Grades;
     private PriorityQueue<Event> eventsToJoin = new PriorityQueue(new Date.EventComparator());
 
@@ -40,19 +41,23 @@ public class Student extends Person implements Comparable<Student>{
 
     }
 
-    public ArrayList<Course> getCurrentCourses(){
+    public ArrayList<Course> getCurrentCourses()
+    {
         return currentCourses;
     }
 
-    public ArrayList<ArrayList<Course>> getPastCourses(){
+    public ArrayList<ArrayList<Course>> getPastCourses()
+    {
         return pastCourses;
     }
 
-    public HashMap<String,Integer> getAttendance(){
+    public HashMap<String,Integer> getAttendance()
+    {
         return Attendance;
     }
 
-    public HashMap<String, Grade> getGrades(){
+    public HashMap<String, Grade> getGrades()
+    {
         return Grades;
     }
 
@@ -111,6 +116,11 @@ public class Student extends Person implements Comparable<Student>{
         return entryYear;
     }
 
+    public void setDb(DataBase db)
+    {
+        this.db = db;
+    }
+
     /*
     public void addEvent(Event e)
     {
@@ -123,16 +133,44 @@ public class Student extends Person implements Comparable<Student>{
         eventsToJoin.add(e);
     }
 
+    public void courseSelection()
+    {
+        if (courseSelectionApprove == true) {
+            System.out.println("You cannot select courses.");
+            return;
+        }
+
+        currentCourses.clear();
+
+        Scanner kb = new Scanner(System.in);
+
+        viewCurriculum();
+
+        for (;;) {
+            System.out.println("Please enter course id: | (Exit: q) ");
+            String s = kb.nextLine();
+
+            if (s.equals("q"))
+                break;
+
+            if (db.findCourseWID(s) != null)
+                currentCourses.add(db.findCourseWID(s));
+            else
+                System.out.println("There isn't any course with this id.");
+        }
+    }
+
     public void menu()
     {
         for (;;) {
-            System.out.println("WELCOME TO STUDENT MENU");
+            System.out.println("\n        WELCOME TO STUDENT MENU");
             System.out.println("0) Exit");
-            System.out.println("1) viewTranscript method");
-            System.out.println("2) viewGrades method");
-            System.out.println("3) viewCourseGrade method");
-            System.out.println("4) viewCurriculum method");
-            System.out.println("5) viewAttendance method");
+            System.out.println("1) View Transcript");
+            System.out.println("2) View All Grades");
+            System.out.println("3) View Course Grade");
+            System.out.println("4) View Curriculum");
+            System.out.println("5) View Attendances");
+            System.out.println("6) Select Courses");
             // etkinlik ekle
             // etkinlik goruntule
 
@@ -150,8 +188,8 @@ public class Student extends Person implements Comparable<Student>{
                     viewGrades();
                     break;
                 case 3:
-                    System.out.println("Ders kodu: ");
-                    viewCourseGrades(kb.nextLine());
+                    System.out.println("Enter Course Code: ");
+                    viewCourseGrades(kb.nextLine().toUpperCase());
                     break;
                 case 4:
                     viewCurriculum();
@@ -159,8 +197,11 @@ public class Student extends Person implements Comparable<Student>{
                 case 5:
                     viewAttendance();
                     break;
+                case 6:
+                    courseSelection();
+                    break;
                 default:
-                    System.out.println("Tekrar giris");
+                    System.out.println("Try Again!");
             }
         }
     }
@@ -168,71 +209,82 @@ public class Student extends Person implements Comparable<Student>{
     public void viewTranscript()
     {
         int year = entryYear;
-
+        System.out.println("\n//////////////////////////////////////TRANSCRIPT//////////////////////////////////////\n");
         System.out.println("Name-Surname: " + this.getUserName() + ' ' + this.getUserSurname());
         System.out.println("ID: " + this.getUserID());
         System.out.println("Department: " + getDepartment());
         System.out.println("Register Date: " + entryYear);
         System.out.println("Advisor Teacher ID: " + getAdvisorTeacherID());
-
+        System.out.println("\nCurrent Courses:");
+        if (term % 2 == 1)
+            System.out.printf("  %d Fall%n", year + term/2);
+        else
+            System.out.printf("  %d Spring%n", year + term/2);
         for (int i = 0; i < currentCourses.size(); ++i) {
             Course c = currentCourses.get(i);
-            System.out.printf("Course code: %s | Course name: %s | Course credit: %d | Grade: %s%n", c.getCourseCode(),
-                                                                                                     c.getCourseName(),
-                                                                                                     c.getCredit(),
-                                                                                                     c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade(),
-                                                                                                     Attendance.get(currentCourses.get(i).getCourseCode())));
+            System.out.printf("      Course code: %s | Course name: %s | Course credit: %d | Grade: %s%n", c.getCourseCode(),
+                    c.getCourseName(),
+                    c.getCredit(),
+                    c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade(),
+                            Attendance.get(currentCourses.get(i).getCourseCode())));
 
         }
 
-
+        System.out.println("\nPast Courses: ");
         for (int i = 0; i < pastCourses.size(); ++i) {
             if (i % 2 == 0)
-                System.out.printf("%d Fall%n", year);
+                System.out.printf("  %d Fall%n", year);
             else
-                System.out.printf("%d Spring%n", year++);
+                System.out.printf("  %d Spring%n", year++);
 
             for (int k = 0; k < pastCourses.get(i).size(); ++k) {
                 Course c = pastCourses.get(i).get(k);
-                System.out.printf("Course code: %s | Course name: %s | Course credit: %d | Grade: %s%n", c.getCourseCode(),
-                                                                                                         c.getCourseName(),
-                                                                                                         c.getCredit(),
-                                                                                                         c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getPastTotalGrade()));
+                System.out.printf("      Course code: %s | Course name: %s | Course credit: %d | Grade: %s%n", c.getCourseCode(),
+                        c.getCourseName(),
+                        c.getCredit(),
+                        c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getPastTotalGrade()));
             }
         }
+        System.out.println("\n//////////////////////////////////////////////////////////////////////////////////////\n");
     }
 
     public void viewGrades()
     {
+        System.out.println("\nCurrent Courses:");
+        if (term % 2 == 1)
+            System.out.printf("  %d Fall%n", entryYear + term/2);
+        else
+            System.out.printf("  %d Spring%n", entryYear + term/2);
         for (int i = 0; i < currentCourses.size(); ++i)
-            System.out.println("Name: " + currentCourses.get(i).getCourseName() +
-                               "Code: " + currentCourses.get(i).getCourseCode() +
-                               "Midterm: " + Grades.get(currentCourses.get(i).getCourseCode()).getMidtermGrade() +
-                               "Final: " + Grades.get(currentCourses.get(i).getCourseCode()).getFinalGrade() +
-                               "Project: " + Grades.get(currentCourses.get(i).getCourseCode()).getProjectGrade() +
-                               "Total Grade: " + Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade());
-            //System.out.println(Grades.get(currentCourses.get(i));
+            System.out.println("      Code: " + currentCourses.get(i).getCourseCode() +
+                    " | Midterm: " + Grades.get(currentCourses.get(i).getCourseCode()).getMidtermGrade() +
+                    " | Final: " + Grades.get(currentCourses.get(i).getCourseCode()).getFinalGrade() +
+                    " | Project: " + Grades.get(currentCourses.get(i).getCourseCode()).getProjectGrade() +
+                    " | Total Grade: " + Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade() +
+                    " | Name: " + currentCourses.get(i).getCourseName());
+        //System.out.println(Grades.get(currentCourses.get(i));
     }
-    
+
     // viewing the grade of single course, the course id is given with parameter
     public void viewCourseGrades(String courseCode){
         if(Grades.get(courseCode) == null)
             System.out.println("No grade for student");
         else
-            System.out.println(Grades.get(courseCode));
+            System.out.println("      " + Grades.get(courseCode));
     }
 
     public void viewAttendance()
     {
         for (int i = 0; i < currentCourses.size(); ++i) {
             Course c = currentCourses.get(i);
-            System.out.println("Course name: " + c.getCourseName());
-            System.out.println("Total number of courses " + c.getTotalCourses());
-            System.out.println("Number of absent day: " + Attendance.get(c.getCourseCode()));
+            System.out.println("Course: " + c.getCourseCode() + " | " + c.getCourseName());
+            System.out.println("      Total number of courses " + c.getTotalCourses());
+            System.out.println("      Number of absent day: " + Attendance.get(c.getCourseCode()));
 
             if (c.getLetterGrade(Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade(),
                     Attendance.get(currentCourses.get(i).getCourseCode())).equals("NA"))
-                System.out.println("Currently your grade is NA. You should attend your classes if you want to pass..");
+                System.out.println("        Currently your grade is NA. You should attend your classes if you want to pass..");
+            System.out.printf("\n");
         }
     }
 
@@ -241,9 +293,10 @@ public class Student extends Person implements Comparable<Student>{
         try {
             FileReader myObj = new FileReader("src/" + getDepartment() + ".txt");
             BufferedReader myReader = new BufferedReader(myObj);
-            while (myReader.ready()){
+
+            while (myReader.ready())
                 System.out.println(myReader.readLine());
-            }
+
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -278,7 +331,7 @@ public class Student extends Person implements Comparable<Student>{
             case 3 -> Grades.get(courseCode).setProjectGrade(grade);
         }
     }
-    
+
 
     public void endOfSemester()
     {
@@ -289,15 +342,16 @@ public class Student extends Person implements Comparable<Student>{
     }
 
     public void addEvent(String eventOrder) throws IOException{
-      
+
         BufferedWriter writer = new BufferedWriter(new FileWriter("events.txt",true));
         writer.write("\n"+eventOrder+"\n");
         writer.write("NOT CHECKED");
         writer.close();
-    
+
     }
 
-    public void showEvents()throws IOException{
+    public void showEvents()throws IOException
+    {
 
         Queue<String>record = new LinkedList<String>();
         String line = "";
@@ -306,26 +360,26 @@ public class Student extends Person implements Comparable<Student>{
 
         br.readLine();
 
-        while((line = br.readLine()) != null){
+        while((line = br.readLine()) != null)
             record.add(line + "\n");
-        }
-    
+
         br.close();
 
         System.out.println(record);
     }
-        
+
     @Override
-    public int compareTo(Student o) {
+    public int compareTo(Student o)
+    {
         return Integer.compare(getUserID(),o.getUserID());
     }
 
     public String toString()
     {
         return "isim: " + getUserName() + " soyisim: " + getUserSurname() + " mail: " +
-            getUserMail() + " sifre: " + getUserPassword() + " user id: " + getUserID()
-            + " advisor id: " + getAdvisorTeacherID() + " department: "  + getDepartment()
-            + " term: " + getTerm() + " ders durumu: " + getCourseSelectionApprove();
+                getUserMail() + " sifre: " + getUserPassword() + " user id: " + getUserID()
+                + " advisor id: " + getAdvisorTeacherID() + " department: "  + getDepartment()
+                + " term: " + getTerm() + " ders durumu: " + getCourseSelectionApprove();
     }
 
     public String studentToFile()
