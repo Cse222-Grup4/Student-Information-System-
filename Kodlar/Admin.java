@@ -73,7 +73,7 @@ public class Admin extends Officer{
 	public boolean removeOfficer(ArrayList < Officer > officers , Officer oldOfficer){
 		// Registers teacher by using Array List's add method.
 		boolean success;
-		success = teachers.remove(oldOfficer);
+		success = officers.remove(oldOfficer);
 		return success;
 	}
 
@@ -92,7 +92,7 @@ public class Admin extends Officer{
 	}
 
 	public void menu(){
-		int choice , innerChoice;
+		int choice , innerChoice,id;
 		for (;;) {
 			System.out.println("WELCOME TO ADMIN MENU");
 			System.out.println("0) Exit");
@@ -114,7 +114,7 @@ public class Admin extends Officer{
 					System.out.println("3) Add Teacher");
 					innerChoice = scanner.nextInt();
 					String mail,password, name, surname;
-					int id,year;
+					int year;
 					System.out.println("Enter name");
 					name; = scanner.nextLine();
 					System.out.println("Enter surname");
@@ -129,17 +129,17 @@ public class Admin extends Officer{
 						case 0:
 						break;
 						case 1:
-							Officer temp = new Officer(name, surname, mail, password, id,db);
+							Officer tempO = new Officer(name, surname, mail, password, id,db);
 							//add database the Officer.
 						break;
 						case 2:
 							System.out.println("Enter year");
-							year = scanner.nextLine();
-							Student temp = new Student(mail, password, name, surname, id, year);
+							year = Integer.parseInt(scanner.nextLine());
+							Student tempO = new Student(mail, password, name, surname, id, year);
 							//add database the student.
 						break;
 						case 3:
-							Admin temp = new Admin(name, surname, mail, password, id,db);
+							Admin tempO = new Admin(name, surname, mail, password, id,db);
 							//add database the Admin.
 						break;
 						default:
@@ -147,7 +147,7 @@ public class Admin extends Officer{
 					}
 				break;
 				case 2:
-					int id;
+					
 					System.out.println("0) Exit");
 					System.out.println("1) Remove User");
 					innerChoice = scanner.nextInt();
@@ -164,7 +164,7 @@ public class Admin extends Officer{
 					}
 				break;
 				case 3:
-					int id;
+					
 					System.out.println("0) Exit");
 					System.out.println("1) Inquire User");
 					innerChoice = scanner.nextInt();
