@@ -1,4 +1,4 @@
-id;mail;password;name;surname;courseIDs
-1001;a@gtu.edu.tr;abc;Ahmet;Ahmet;CSE101,CSE102
-1002;s@gtu.edu.tr;123;Samet;Samet;CSE222
-1003;sd@gtu.edu.tr;qwe;Serdil;Serdil;null
+id;mail;password;name;surname;department;type;courseIDs
+1001;a@gtu.edu.tr;abc;Ahmet;Ahmet;CSE;0;BIL 101,CSE102
+1002;s@gtu.edu.tr;123;Samet;Samet;computer;1;CSE222
+1003;sd@gtu.edu.tr;qwe;Serdil;Serdil;math;0;null
