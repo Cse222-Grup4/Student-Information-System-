@@ -49,6 +49,7 @@ public class DataBase {
     public void initialMenu(){
 
         try {
+            Scanner input = new Scanner(System.in);
             String inputLine;
             int choice;
 
@@ -67,9 +68,9 @@ public class DataBase {
                     default -> System.out.println("Please select from menu\n");
                 }
             } while (choice != 0);
-        }catch (NumberFormatException nfe){
-            System.out.println("!You typed char instead of number!");
-            nfe.printStackTrace();
+        }catch (Exception e){
+            System.out.println("!Exception found.!");
+            e.printStackTrace();
         }
     }
 
@@ -77,7 +78,8 @@ public class DataBase {
      * Log In to the system.
      * @throws NumberFormatException  If the userID does not contain a parsable int.
      */
-    private void signIn() throws NumberFormatException{
+    private void signIn() throws Exception{
+        Scanner input = new Scanner(System.in);
         int inputUserID;
 
         System.out.print("UserID:");
