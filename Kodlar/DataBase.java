@@ -135,7 +135,6 @@ public class DataBase {
                 if(!courseIDLine.equals("null")) {
                     courseIDs = courseIDLine.split(",");
                     for (String c : courseIDs) {
-                        System.out.println(c);
                         teacher.addCourse(findCourseWID(c));
                     }
                 }
