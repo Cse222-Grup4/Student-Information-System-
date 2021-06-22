@@ -47,10 +47,10 @@ public class Officer extends Person {
    * @param studentID Student's ID to inquire
    * @return Student object
    */
-  public Student inquireStudentInformation(ArrayList < Student > students, int studentID) {
+  public Student inquireStudentInformation(int studentID) {
     
     for (int i = 0; i < students.size(); i++) {
-      if (students.get(i).getUserID() == studentID)
+      if (db.getStudents().get(i).getUserID() == studentID)
         return students.get(i);
     }
     return null;
@@ -61,9 +61,9 @@ public class Officer extends Person {
    * @param students Student List
    * @param studentID Student's ID to print transcript
    */
-  public void viewTranscript(ArrayList < Student > students, int studentID) {
+  public void viewTranscript(int studentID) {
     for (int i = 0; i < students.size(); i++) {
-      if (students.get(i).getUserID() == studentID){
+    	if (db.getStudents().get(i).getUserID() == studentID){
         students.get(i).viewTranscript();
         break;
       }
@@ -76,10 +76,10 @@ public class Officer extends Person {
    * @param student Student object to be added
    * @return Whether student is registered
    */
-  public boolean registerStudents(ArrayList < Student > students, Student student) {
+  public boolean registerStudents( Student student) {
     // Registers student by using Array List's add method.
     boolean ret;
-    ret = students.add(student);
+    ret = db.getStudents().add(student);
     return ret;
   }
 
@@ -142,7 +142,69 @@ public class Officer extends Person {
         
     }
 
-
+    public void menu()throws Exception{
+    	int choice,id;
+    	boolean flag=true;
+    	while(flag) {
+    		System.out.println("0-) Exit");
+    		System.out.println("1-) Inquire Student information with student id");
+    		System.out.println("2-) View transcript");
+    		System.out.println("3-) Register student");
+    		System.out.println("4-) Confirm/cancel event");
+    		System.out.println("5-) Show events");
+    		System.out.println("6-) Add new event");
+    		Scanner input = new Scanner(System.in);
+        choice = Integer.parseInt(input.nextLine());
+        switch (choice) {
+          case 0:
+            flag=false;
+            break;
+          case 1:
+            System.out.println("Enter student id: ");
+            id=Integer.parseInt(input.nextLine());
+            inquireStudentInformation(id);
+            break;
+          case 2:
+            System.out.println("Enter student id: ");
+            id=Integer.parseInt(input.nextLine());
+            viewTranscript(id);
+            break;
+          case 3://String mail,String password,String name,String surname,int id, int year
+            System.out.println("Enter student mail");
+            String mail=input.nextLine();
+            System.out.println("Enter student passwd");
+            String passwd=input.nextLine();
+            System.out.println("Enter student name");
+            String name=input.nextLine();
+            System.out.println("Enter student surname");
+            String surname=input.nextLine();
+            System.out.println("Enter student id");
+            id=Integer.parseInt(input.nextLine());
+            System.out.println("Enter year");
+            int year=Integer.parseInt(input.nextLine());
+            Student student=new Student(mail,passwd,name,surname,id,year);
+            break;
+          case 4:
+            System.out.println("Enter Event Sitition:");
+            int sitition=Integer.parseInt(input.nextLine());
+            System.out.println("Enter event name");
+            String eventName=input.nextLine();
+            confirmCancelEvents(sitition, eventName);
+            break;
+          case 5:
+            showEvents();
+            break;
+          case 6:
+            System.out.println("Enter event");
+            String eventOrder=input.nextLine();
+            addEvent(eventOrder);
+            break;
+          default:
+            System.out.println("Please choose from the menu");
+            break;
+        }
+    	}
+    }
     public void showEvents()throws IOException{
 
         Queue<String>record = new LinkedList<String>();
