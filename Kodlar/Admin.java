@@ -6,7 +6,6 @@ public class Admin extends Officer {
 
 	Admin(String name, String surname, String mail, String password, int ID, DataBase db)
 	{
-
 		super(name, surname, mail, password, ID, db);
 	}
 	/**
