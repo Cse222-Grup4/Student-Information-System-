@@ -2,12 +2,14 @@ import java.util.*;
 import java.io.*;
 
 public class Admin extends Officer{
+	private DataBase db;
 	Admin(String name, String surname, String mail, String password, int ID,DataBase db) {
 		this.name=name;
 		this.surname=surname;
 		this.mail=mail;
 		this.password=password;
 		this.ID=ID;
+		this.db=db;
 	}
 	/**
 	* Constructor with two parameters.
@@ -127,7 +129,7 @@ public class Admin extends Officer{
 						case 0:
 						break;
 						case 1:
-							Officer temp = new Officer(name, surname, mail, password, id);
+							Officer temp = new Officer(name, surname, mail, password, id,db);
 							//add database the Officer.
 						break;
 						case 2:
@@ -137,7 +139,7 @@ public class Admin extends Officer{
 							//add database the student.
 						break;
 						case 3:
-							Admin temp = new Admin(name, surname, mail, password, id);
+							Admin temp = new Admin(name, surname, mail, password, id,db);
 							//add database the Admin.
 						break;
 						default:
