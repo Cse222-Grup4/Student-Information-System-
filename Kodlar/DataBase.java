@@ -107,35 +107,51 @@ public class DataBase {
     }
 
     
-     private void readTeachersFile() throws IOException {
+    private void readTeachersFile() throws IOException {
         // reader for read teachers file
         File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
         BufferedReader bufferedReader = new BufferedReader(new FileReader(usersFile));
         bufferedReader.readLine(); // reading first line(since first line does not include any data).
 
-        String line,userName,userPassword,userSurname,userMail,courseIDLine;
+        String line,userName,userPassword,userSurname,userMail,courseIDLine,userDepartment;
         String[] courseIDs;
-        int userID;
+        int userID,userType;
 
         while((line = bufferedReader.readLine()) != null){
             // reading teachers properties
             userID = Integer.parseInt(line.split(";")[0]); userMail = line.split(";")[1];
             userPassword = line.split(";")[2]; userName = line.split(";")[3];
-            userSurname = line.split(";")[4];
+            userSurname = line.split(";")[4]; userDepartment = line.split(";")[5];
+            userType = Integer.parseInt(line.split(";")[6]);
 
-            Teacher teacher = new Teacher(userMail,userPassword,userName,userSurname,userID,this);
 
             if(courses.size() == 0)
                 readCourses("courses.txt");
 
-            courseIDLine = line.split(";")[5];
-            if(!courseIDLine.equals("null")) {
-                courseIDs = courseIDLine.split(",");
-                for (String c : courseIDs) {
-                    teacher.addCourse(findCourseWID(c));
+            if(userType == 0) {
+                Teacher teacher = new Teacher(userMail, userPassword, userName, userSurname, userID, userDepartment, this);
+
+                courseIDLine = line.split(";")[7];
+                if(!courseIDLine.equals("null")) {
+                    courseIDs = courseIDLine.split(",");
+                    for (String c : courseIDs) {
+                        System.out.println(c);
+                        teacher.addCourse(findCourseWID(c));
+                    }
                 }
+                teachers.add(teacher);
             }
-            teachers.add(teacher);
+            else {
+                AdvisorTeacher advisorTeacher = new AdvisorTeacher(userMail, userPassword, userName, userSurname, userID, userDepartment, this);
+                courseIDLine = line.split(";")[7];
+                if(!courseIDLine.equals("null")) {
+                    courseIDs = courseIDLine.split(",");
+                    for (String c : courseIDs) {
+                        advisorTeacher.addCourse(findCourseWID(c));
+                    }
+                }
+                teachers.add(advisorTeacher);
+            }
         }
         bufferedReader.close();
     }
@@ -145,7 +161,7 @@ public class DataBase {
         File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(usersFile));
 
-        bufferedWriter.write("id;mail;password;name;surname;courseIDs\n");
+        bufferedWriter.write("id;mail;password;name;surname;department;type;courseIDs\n");
         ArrayList<String> courseIDs;
 
         for (Teacher teacher : teachers) {
@@ -153,13 +169,19 @@ public class DataBase {
                     + teacher.getUserMail() + ";"
                     + teacher.getUserPassword() + ";"
                     + teacher.getUserName() + ";"
-                    + teacher.getUserSurname() + ";");
+                    + teacher.getUserSurname() + ";"
+                    + teacher.getDepartment() + ";");
+            if(teacher instanceof AdvisorTeacher)
+                bufferedWriter.write("1;");
+            else
+                bufferedWriter.write("0;");
             courseIDs = teacher.getCourseIDs();
-            if (courseIDs == null)
+            if (courseIDs.size() == 0)
                 bufferedWriter.write("null\n");
             else{
-                for(int i=0;i<courseIDs.size()-1;++i)
+                for(int i=0;i<courseIDs.size()-1;++i) {
                     bufferedWriter.write(courseIDs.get(i) + ",");
+                }
                 bufferedWriter.write(courseIDs.get(courseIDs.size()-1) +"\n");
             }
         }
