@@ -206,7 +206,8 @@ public class Student extends Person implements Comparable<Student> {
                     showEvents();
                     break;
                 case 8:
-                    String eventOrder;
+                    System.out.println("Enter event");
+                    String eventOrder = input.nextLine();
                     addEvent(eventOrder);
                     break;
                 default:
