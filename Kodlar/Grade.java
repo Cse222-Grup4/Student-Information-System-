@@ -51,6 +51,6 @@ public class Grade {
     public String toString()
     {
         return "Midterm: " + midtermGrade + " Final: " + finalGrade + " Project: " + projectGrade +
-                " Total grade: " + totalGrade + "\n";
+                " Total grade: " + getTotalGrade() + "\n";
     }
 }
