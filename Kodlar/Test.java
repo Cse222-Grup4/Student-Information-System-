@@ -7,5 +7,12 @@ public class Test {
     public static void main(String[] args)
     {
 
+        try {
+            DataBase dataBase = new DataBase();
+            dataBase.initialMenu();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 }
