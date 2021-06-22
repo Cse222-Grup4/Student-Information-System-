@@ -41,6 +41,10 @@ public class Course implements Comparable<Course>  {
         students.add(s);
     }
 
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+    
 /*
     public Grade getGrade() {
         return grade;
