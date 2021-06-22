@@ -49,7 +49,7 @@ public class Officer extends Person {
    */
   public Student inquireStudentInformation(int studentID) {
     
-    for (int i = 0; i < students.size(); i++) {
+    for (int i = 0; i < db.getStudents().size(); i++) {
       if (db.getStudents().get(i).getUserID() == studentID)
         return students.get(i);
     }
@@ -62,7 +62,7 @@ public class Officer extends Person {
    * @param studentID Student's ID to print transcript
    */
   public void viewTranscript(int studentID) {
-    for (int i = 0; i < students.size(); i++) {
+    for (int i = 0; i < db.getStudents().size(); i++) {
     	if (db.getStudents().get(i).getUserID() == studentID){
         students.get(i).viewTranscript();
         break;
