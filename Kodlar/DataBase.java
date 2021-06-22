@@ -18,7 +18,7 @@ public class DataBase {
 
    // private HashMap <String,ArrayList<Student>> courseStudents;
 
-
+    public ArrayList<Student> getStudents(){return students;}
     DataBase() throws IOException
     {
         try{
