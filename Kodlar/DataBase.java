@@ -29,7 +29,7 @@ public class DataBase {
             courses = new ArrayList<>();
             events = new LinkedList<>();
             curriculums = new ArrayList<>();
-            admin = new Admin("admin","admin","admin@gtu.edu.tr","admin",this);
+            admin = new Admin("admin","admin","admin@gtu.edu.tr","admin",1,this);
 
             readCourses("src/courses.txt");
             readTeachersFile();
