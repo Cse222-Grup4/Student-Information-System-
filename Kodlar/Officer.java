@@ -19,7 +19,6 @@ public class Officer extends Person {
     super(mail, password, name, surname, ID);
     this.db=db;
     db.addOfficer(this);
-    //TODO Auto-generated constructor stub
   }
 
   /**
@@ -43,7 +42,6 @@ public class Officer extends Person {
 
   /**
    * Inquire student information by Student ID
-   * @param students Student List
    * @param studentID Student's ID to inquire
    * @return Student object
    */
@@ -58,7 +56,6 @@ public class Officer extends Person {
 
   /**
    * Prints student's Transcript
-   * @param students Student List
    * @param studentID Student's ID to print transcript
    */
   public void viewTranscript(int studentID) {
@@ -72,7 +69,6 @@ public class Officer extends Person {
 
   /**
    * Add student in student list
-   * @param students Student List
    * @param student Student object to be added
    * @return Whether student is registered
    */
@@ -95,11 +91,11 @@ public class Officer extends Person {
   
     public void confirmCancelEvents(int situation,String orderEvent) throws IOException{
 
-        File events = new File("events.txt");
+        File events = new File("src/events.txt");
         File temp = new File("deleted.txt");
         String line;
         temp.createNewFile();
-        BufferedReader br = new BufferedReader(new FileReader("events.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("src/events.txt"));
         BufferedWriter writer = new BufferedWriter(new FileWriter("deleted.txt"));
 
         br.readLine();
@@ -183,6 +179,8 @@ public class Officer extends Person {
             System.out.println("Enter year");
             int year=Integer.parseInt(input.nextLine());
             Student student=new Student(mail,passwd,name,surname,id,year);
+            db.getStudents().add(student);
+            // STUDENTS.TXT
             break;
           case 4:
             System.out.println("Enter Event Sitition:");
@@ -210,7 +208,7 @@ public class Officer extends Person {
         Queue<String>record = new LinkedList<String>();
         String line = "";
 
-        BufferedReader br = new BufferedReader(new FileReader("events.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("src/events.txt"));
 
         br.readLine();
 
@@ -226,7 +224,7 @@ public class Officer extends Person {
 
     public void addEvent(String eventOrder) throws IOException{
       
-        BufferedWriter writer = new BufferedWriter(new FileWriter("events.txt",true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("src/events.txt",true));
         writer.write("\n"+eventOrder+"\n");
         writer.write("NOT CHECKED");
         writer.close();
