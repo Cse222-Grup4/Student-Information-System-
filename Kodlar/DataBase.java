@@ -333,6 +333,16 @@ public class DataBase {
         }
         return null;
     }
-
+    private void appendAdvisors() {
+    	for(int i=0;i<students.size();i++) {
+    		for(int j =0 ; j<teachers.size();j++) {
+    			if(students.get(i).getDepartment().equals(teachers.get(j).getDepartment()) && teachers.get(j).getIsAdvisor()) {
+    				AdvisorTeacher temp = (AdvisorTeacher)teachers.get(j);
+    				temp.getStudents().add(students.get(i));
+    				students.get(i).setAdvisorTeacherID(teachers.get(j).getUserID());
+    			}
+    		}
+    	}
+    }
     
 }
