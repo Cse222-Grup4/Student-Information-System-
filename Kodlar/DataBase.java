@@ -36,6 +36,7 @@ public class DataBase {
             readTeachersFile();
             readStudentFile();
             importOfficersFromFile();
+			appendAdvisors();
             //readUsersFile(); silinmis
 
             //writeStudentFile();
