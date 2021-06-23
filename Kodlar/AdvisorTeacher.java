@@ -44,16 +44,21 @@ public class AdvisorTeacher extends Teacher {
     }
     
     private Student getStudent(int studentID,BinaryTree<Student> students) {
-    	if(students.getData().getUserID() == studentID) {
-    		return students.getData();
-    	}
-    	if(students.getData().getUserID() > studentID) {
-    		getStudent(studentID,students.getLeftSubtree());
-    	}
-    	else {
-    		getStudent(studentID,students.getRightSubtree());
-    	}
-    	return null;
+    	try {
+        	if(students.getData().getUserID() == studentID) {
+        		return students.getData();
+        	}
+        	if(students.getData().getUserID() > studentID) {
+        		getStudent(studentID,students.getLeftSubtree());
+        	}
+        	else {
+        		getStudent(studentID,students.getRightSubtree());
+        	}
+        	return null;
+    		}
+    		catch(Exception e) {
+    		  return null;
+    		}
     }
 
     private void displayStudents(BinaryTree<Student> students) {
