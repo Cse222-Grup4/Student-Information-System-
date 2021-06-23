@@ -1,4 +1,7 @@
 id;mail;password;name;surname
-1111;a@gtu.edu.tr;abc;Ahmet;Ahmet
-2222;s@gtu.edu.tr;123;Samet;Samet
-3333;sd@gtu.edu.tr;qwe;Serdil;Serdil
+210110;a@gtu.edu.tr;000000;Ahmet;Turan
+210120;s@gtu.edu.tr;000000;Semih;Tur
+210130;e@gtu.edu.tr;000000;Elon;Musk
+210140;b@gtu.edu.tr;000000;Bill;Gates
+210150;m@gtu.edu.tr;000000;Mark;Zuckerberg
+210160;ali@gtu.edu.tr;000000;Ali;Tura
