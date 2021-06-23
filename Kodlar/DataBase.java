@@ -132,7 +132,7 @@ public class DataBase {
     public void importOfficersFromFile() throws NumberFormatException, IOException {
         String line;
         BufferedReader br = new BufferedReader(new FileReader(officersFilePath));
-
+	br.readLine();//first line
         while ((line = br.readLine()) != null) {
             officers.add(new Officer(
                     line.split(";")[3],
