@@ -429,5 +429,25 @@ public class DataBase {
             }
         }
     }
+    /**
+	 * @return the students
+	 */
+	public ArrayList<Student> getStudents() {
+		return students;
+	}
+
+	/**
+	 * @return the teachers
+	 */
+	public ArrayList<Teacher> getTeachers() {
+		return teachers;
+	}
+
+	/**
+	 * @return the officers
+	 */
+	public ArrayList<Officer> getOfficers() {
+		return officers;
+	}
 
 }
