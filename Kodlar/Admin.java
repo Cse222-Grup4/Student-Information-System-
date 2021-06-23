@@ -99,7 +99,7 @@ public class Admin extends Officer {
 		return success;
 	}
 
-	public void menu()
+	public void menu()//scanner.nexInt() ler sıkıntı cıkartıyordu sildim. Ugur
 	{
 		int choice, innerChoice, id;
 
