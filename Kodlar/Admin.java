@@ -1,9 +1,7 @@
 import java.util.*;
-import java.io.*;
 
 public class Admin extends Officer {
-	private DataBase db;
-
+	
 	Admin(String name, String surname, String mail, String password, int ID, DataBase db)
 	{
 		super(name, surname, mail, password, ID, db);
@@ -28,11 +26,12 @@ public class Admin extends Officer {
 	 * @param teacherID Teacher's ID to inquire
 	 * @return Teacher object
 	 */
-	public Teacher inquireTeacherInformation(ArrayList <Teacher> teachers, int teacherID)
+	public Teacher inquireTeacherInformation(int teacherID)
 	{
-		for (int i = 0; i < teachers.size(); i++)
-			if (teachers.get(i).getUserID() == teacherID)
-				return teachers.get(i);
+		
+		for (int i = 0; i < db.getTeachers().size(); i++)
+			if (db.getTeachers().get(i).getUserID() == teacherID)
+				return db.getTeachers().get(i);
 
 		return null;
 	}
@@ -43,60 +42,60 @@ public class Admin extends Officer {
 	 * @param officerID Officer's ID to inquire
 	 * @return Officer object
 	 */
-	public Officer inquireOfficerInformation(ArrayList < Officer > officers, int officerID)
+	public Officer inquireOfficerInformation(int officerID)
 	{
-		for (int i = 0; i < officers.size(); i++)
-			if (officers.get(i).getUserID() == officerID)
-				return officers.get(i);
+		for (int i = 0; i < db.getOfficers().size(); i++)
+			if (db.getOfficers().get(i).getUserID() == officerID)
+				return db.getOfficers().get(i);
 
 		return null;
 	}
 
-	public boolean addOfficer(ArrayList < Officer > officers , Officer newOfficer)
+	public boolean addOfficer(Officer newOfficer)
 	{
 		// Registers officer by using Array List's add method.
 		boolean success;
-		success = officers.add(newOfficer);
+		success = db.getOfficers().add(newOfficer);
 		return success;
 	}
 
-	public boolean addTeacher(ArrayList < Teacher > teachers , Teacher newTeacher)
+	public boolean addTeacher(Teacher newTeacher)
 	{
 		// Registers teacher by using Array List's add method.
 		boolean success;
-		success = teachers.add(newTeacher);
+		success = db.getTeachers().add(newTeacher);
 		return success;
 	}
 
-	public boolean addStudent(ArrayList < Student > students , Student newStudent)
+	public boolean addStudent(Student newStudent)
 	{
 		// Registers student by using Array List's add method.
 		boolean success;
-		success = students.add(newStudent);
+		success = db.getStudents().add(newStudent);
 		return success;
 	}
 
-	public boolean removeOfficer(ArrayList < Officer > officers , Officer oldOfficer)
+	public boolean removeOfficer(Officer oldOfficer)
 	{
 		// Registers teacher by using Array List's add method.
 		boolean success;
-		success = officers.remove(oldOfficer);
+		success = db.getOfficers().remove(oldOfficer);
 		return success;
 	}
 
-	public boolean removeTeacher(ArrayList < Teacher > teachers , Teacher oldTeacher)
+	public boolean removeTeacher(Teacher oldTeacher)
 	{
 		// Registers teacher by using Array List's add method.
 		boolean success;
-		success = teachers.remove(oldTeacher);
+		success = db.getTeachers().remove(oldTeacher);
 		return success;
 	}
 
-	public boolean removeStudent(ArrayList < Student > students , Student oldStudent)
+	public boolean removeStudent(Student oldStudent)
 	{
 		// Registers student by using Array List's add method.
 		boolean success;
-		success = students.remove(oldStudent);
+		success = db.getStudents().remove(oldStudent);
 		return success;
 	}
 
@@ -111,8 +110,9 @@ public class Admin extends Officer {
 			System.out.println("2) Remove User");
 			System.out.println("3) Inquire User");
 
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
-			choice = scanner.nextInt();
+			choice = Integer.parseInt(scanner.nextLine());
 
 			switch (choice) {
 				case 0:
@@ -123,7 +123,7 @@ public class Admin extends Officer {
 					System.out.println("2) Add Student");
 					System.out.println("3) Add Teacher");
 
-					innerChoice = scanner.nextInt();
+					innerChoice =Integer.parseInt(scanner.nextLine());
 					String mail,password, name, surname;
 					int year;
 
@@ -134,7 +134,7 @@ public class Admin extends Officer {
 					surname = scanner.nextLine();
 
 					System.out.println("Enter id: ");
-					id = scanner.nextInt();
+					id = Integer.parseInt(scanner.nextLine());
 
 					System.out.println("Enter mail: ");
 					mail = scanner.nextLine();
@@ -146,18 +146,17 @@ public class Admin extends Officer {
 						case 0:
 							break;
 						case 1:
-							Officer tempO = new Officer(name, surname, mail, password, id, db);
-							//add database the Officer.
+							addOfficer(new Officer(name, surname, mail, password, id, db));
 							break;
 						case 2:
 							System.out.println("Enter year");
 							year = Integer.parseInt(scanner.nextLine());
-							Student tempS = new Student(mail, password, name, surname, id, year);
-							//add database the student.
+							addStudent(new Student(mail, password, name, surname, id, year));
 							break;
 						case 3:
-							Admin tempA = new Admin(name, surname, mail, password, id,db);
-							//add database the Admin.
+							System.out.println("Enter department");
+							String department=scanner.nextLine();
+							addTeacher(new Teacher(name, surname, mail, password, id,department,db));
 							break;
 						default:
 							break;
