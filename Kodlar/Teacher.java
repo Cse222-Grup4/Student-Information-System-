@@ -15,7 +15,7 @@ public class Teacher extends Person {
     /**
      * DataBase object for communicate with database
      */
-    private final DataBase database;
+    protected final DataBase database;
     /**
      * The courses of teacher. Using SkipList data structure, because Skip-List provide sorted access and fast operations.
      */
