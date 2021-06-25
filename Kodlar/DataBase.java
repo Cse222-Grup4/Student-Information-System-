@@ -13,7 +13,6 @@ public class DataBase {
     private ArrayList<Officer> officers;
     private ArrayList<Course> courses;
     private Queue<Event> events;
-    private ArrayList<Curriculum> curriculums;
     private Admin admin;
 	private HashMap <String ,ListGraph> connectedCourses;
     private String teachersFilePath = "src/teachers.txt";
@@ -26,7 +25,6 @@ public class DataBase {
             officers = new ArrayList<>();
             courses = new ArrayList<>();
             events = new LinkedList<>();
-            curriculums = new ArrayList<>();
 			connectedCourses = new HashMap<>();
             admin = new Admin("admin","admin","admin@gtu.edu.tr","admin",1,this);
 
@@ -423,15 +421,6 @@ public class DataBase {
         for(Teacher t : teachers)
             System.out.println(t);
     }
-    public Curriculum getCurriculum(String department) {
-        for(int i=0;i<curriculums.size();i++) {
-            if(curriculums.get(i).getDepartment().equals(department)) {
-                return curriculums.get(i);
-            }
-        }
-        return null;
-    }
-
     public Student findStudentWID(int ID){
         for (Student student : students) {
             if (student.getUserID() == ID)
