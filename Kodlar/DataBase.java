@@ -13,7 +13,7 @@ public class DataBase {
     private ArrayList<Teacher> teachers;
     private ArrayList<Officer> officers;
     private ArrayList<Course> courses;
-    private Queue<Event> events;
+    private PriorityQueue<Event> events;
     private Admin admin;
 	private HashMap <String ,ListGraph> connectedCourses;
     private String teachersFilePath = "src/teachers.txt";
@@ -530,5 +530,6 @@ public class DataBase {
             file.write(temp.getEventName() + ","+ temp.getEventDescription()+ ","+ temp.getEventDate()+ ","+temp.getSituation()+ ","+temp.getwaitSituation()+"\n");
         }
     }
+	public PriorityQueue<Event> getEvents(){return events;}
 	    
 }
