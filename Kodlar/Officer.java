@@ -156,7 +156,7 @@ public class Officer extends Person {
 	        		id=Integer.parseInt(input.nextLine());
 	        		viewTranscript(id);
 	        		break;
-	        	case 3://String mail,String password,String name,String surname,int id, int year
+	        	case 3:
 	        		System.out.println("Enter student mail");
 	        		String mail=input.nextLine();
 	        		System.out.println("Enter student passwd");
