@@ -192,7 +192,10 @@ public class DataBase {
         return b;
     }
 
-
+    /**
+     * Reads teachers.txt properly and stores teachers information's into the system.
+     * @throws IOException If an I/O error occurs
+     */
     private void readTeachersFile() throws IOException {
         // reader for read teachers file
         File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
@@ -241,6 +244,10 @@ public class DataBase {
         bufferedReader.close();
     }
 
+    /**
+     * Writes all the information's of the teachers to the teachers.txt file.
+     * @throws IOException If an I/O error occurs
+     */
     private void writeTeachersFile() throws IOException {
         // writer for read teachers file
         File usersFile = new File(System.getProperty("user.dir"),teachersFilePath);
@@ -273,6 +280,12 @@ public class DataBase {
         bufferedWriter.close();
     }
 
+	
+    /**
+     * Find the course with given code
+     * @param courseID The code of course
+     * @return If the code of course found in database, return the object. Otherwise returns null.
+     */
     public Course findCourseWID(String courseID) {
         for (Course course : courses) {
             if (course.getCourseCode().equals(courseID))
