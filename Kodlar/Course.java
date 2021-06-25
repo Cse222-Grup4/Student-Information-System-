@@ -1,22 +1,201 @@
 import java.util.ArrayList;
 
-public class Course implements Comparable<Course>  {
-    //private Grade grade;
-    // private ArrayList<Attendance> absent;
+/**
+ * Course class for represent the courses.
+ */
+public class Course implements Comparable<Course> {
+    /**
+     * Term of course.
+     */
     private int courseTerm;
+
+    /**
+     * Code of course.
+     */
     private String courseCode;
+
+    /**
+     * Name of course.
+     */
     private String courseName;
+
+    /**
+     * Credit of course.
+     */
     private int credit;
+
+    /**
+     * Student list of course.
+     */
     private ArrayList<Student> students = new ArrayList<>();
+
+    /**
+     * Total course hours.
+     */
     private final int TotalCourses = 30;
+
+    /**
+     * Represent the linked courses.
+     */
     private String linkedCourse = null;
+
+    /**
+     * Departmen of course.
+     */
     private String department;
 
-        /*private int numOfAttendance = 0;
-    private int numOfAbsent = 0;
-    private boolean ísPass = false;
-    */
+    /**
+     * Constructor with 4 parameters.
+     * @param courseTerm Term of course.
+     * @param courseCode Code of course.
+     * @param courseName Name of course.
+     * @param credit Credit of course.
+     */
+    public Course(int courseTerm, String courseCode, String courseName, int credit)
+    {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.credit = credit;
+        this.courseTerm = courseTerm;
+    }
 
+    /**
+     * Get total course hours.
+     * @return Total course hours.
+     */
+    public int getTotalCourses()
+    {
+        return TotalCourses;
+    }
+
+    /**
+     * Get students.
+     * @return Students.
+     */
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    /**
+     * Get term of course.
+     * @return Term of course.
+     */
+    public int getCourseTerm()
+    {
+        return courseTerm;
+    }
+
+    /**
+     * Set term of course.
+     * @param courseTerm Term of course.
+     */
+    public void setCourseTerm(int courseTerm)
+    {
+        this.courseTerm = courseTerm;
+    }
+
+    /**
+     * Get code of course.
+     * @return
+     */
+    public String getCourseCode()
+    {
+        return courseCode;
+    }
+
+    /**
+     * Set code of course.
+     * @param courseCode Code of course.
+     */
+    public void setCourseCode(String courseCode)
+    {
+        this.courseCode = courseCode;
+    }
+
+    /**
+     * Get name of course.
+     * @return Name of course.
+     */
+    public String getCourseName()
+    {
+        return courseName;
+    }
+
+    /**
+     * Set name of course.
+     * @param courseName Name of course.
+     */
+    public void setCourseName(String courseName)
+    {
+        this.courseName = courseName;
+    }
+
+    /**
+     * Get credit of course.
+     * @return Credit of course.
+     */
+    public int getCredit()
+    {
+        return credit;
+    }
+
+    /**
+     * Set credit of course.
+     * @param credit Credit of course.
+     */
+    public void setCredit(int credit)
+    {
+        this.credit = credit;
+    }
+
+    /**
+     * Get linked courses.
+     * @return String of linked courses.
+     */
+    public String getLinkedCourse()
+    {
+        return linkedCourse;
+    }
+
+    /**
+     * Get department of course.
+     * @return String of department.
+     */
+    public String getDepartment()
+    {
+        return department;
+    }
+
+    /**
+     * Set department of course.
+     * @param department Department of course.
+     */
+    public void setDepartment(String department)
+    {
+        this.department = department;
+    }
+
+    /**
+     * Set linked of course.
+     * @param course Linked of course.
+     */
+    public void setLinkedCourse(String course)
+    {
+        linkedCourse = course;
+    }
+    
+    /**
+     * Add student method.
+     * @param s A student object.
+     */
+    public void addStudent(Student s)
+    {
+        students.add(s);
+    }
+
+    /**
+     * Print course students.
+     */
     public void printCourseStudents()
     {
         System.out.println("size: " + students.size());
@@ -24,83 +203,11 @@ public class Course implements Comparable<Course>  {
             System.out.println(students.get(i));
     }
 
-    public int getTotalCourses()
-    {
-        return TotalCourses;
-    }
-
-    public Course(int courseTerm, String courseCode, String courseName, int credit) {
-        this.courseCode = courseCode;
-        this.courseName = courseName;
-        this.credit = credit;
-        this.courseTerm = courseTerm;
-        /*absent = new ArrayList<>();
-        grade = new Grade();*/
-    }
-
-    public void addStudent(Student s)
-    {
-        students.add(s);
-    }
-
-    public ArrayList<Student> getStudents() {
-        return students;
-    }
-    
-/*
-    public Grade getGrade() {
-        return grade;
-    }
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }*/
-    /*
-    public ArrayList<Attendance> getAbsent() {
-        return absent;
-    }
-    public void setAbsent(ArrayList<Attendance> absent) {
-        this.absent = absent;
-    }*/
-    
-    public int getCourseTerm() {
-        return courseTerm;
-    }
-
-    public void setCourseTerm(int courseTerm) {
-        this.courseTerm = courseTerm;
-    }
-    
-    public String getCourseCode() {
-        return courseCode;
-    }
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
-    public String getCourseName() {
-        return courseName;
-    }
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-    public int getCredit() {
-        return credit;
-    }
-    public void setCredit(int credit) {
-        this.credit = credit;
-    }/*
-    public int getNumOfAttendance() {
-        return numOfAttendance;
-    }
-    public void setNumOfAttendance(int numOfAttendance) {
-        this.numOfAttendance = numOfAttendance;
-    }
-    public int getNumOfAbsent() {
-        return numOfAbsent;
-    }
-    public void setNumOfAbsent(int numOfAbsent) {
-        this.numOfAbsent = numOfAbsent;
-    }*/
-
+    /**
+     * Get letter grade of student.
+     * @param totalGrade Total grade of student.
+     * @return String of total grade.
+     */
     public String getLetterGrade(int totalGrade)
     {
         if (totalGrade < 55)
@@ -120,6 +227,13 @@ public class Course implements Comparable<Course>  {
         else
             return "AA";
     }
+
+    /**
+     * Get letter grade of student.
+     * @param totalGrade Total grade of student.
+     * @param numOfAbsent Number of absent.
+     * @return String of total grade.
+     */
     public String getLetterGrade(int totalGrade, int numOfAbsent)
     {
         double ratio = (double)numOfAbsent / TotalCourses;
@@ -145,17 +259,10 @@ public class Course implements Comparable<Course>  {
             return "AA";
     }
 
-    /*// artık öğrenciyi bulup yapması lazım
-    public void addGrade(int grade,int type){
-        switch (type){
-            case 1 -> this.grade.setMidtermGrade(grade);
-            case 2 -> this.grade.setFinalGrade(grade);
-            case 3 -> this.grade.setProjectGrade(grade);
-        }
-    }
-*/
-
-
+    /**
+     * toString method of Course class.
+     * @return String of course.
+     */
     @Override
     public String toString() {
         return "CourseS{" +
@@ -165,19 +272,15 @@ public class Course implements Comparable<Course>  {
                 ",  courseTerm=" +  courseTerm +
                 '}';
     }
-    
+
+    /**
+     * compareTo method of course class.
+     * @param o Other Course object.
+     * @return Result of compare.
+     */
     @Override
-    public int compareTo(Course o) {
+    public int compareTo(Course o)
+    {
         return Integer.compare(getCredit(),o.getCredit());
     }
-    public String getLinkedCourse() {return linkedCourse;}
-    public String getDepartment(){
-        return department;
-    }
-    public void setDepartment(String department){
-    	this.department = department;
-    }
-    public void setLinkedCourse(String course) {linkedCourse = course;}
-    
-    
 }
