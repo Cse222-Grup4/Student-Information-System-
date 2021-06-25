@@ -1,27 +1,15 @@
-/**
- * Event class for represent the events of school.
- */
-public class Event {
-    /**
-     * Name of event.
-     */
+public class Event implements Comparable<Event>{
     private String eventName;
-
-    /**
-     * Description of event.
-     */
     private String eventDescription;
-
-    /**
-     * Date of event.
-     */
     private Date eventDate;
-
+    private boolean situation;
+    private boolean waitSituation;
+    
     /**
-     * Constructor with 3 parameters.
-     * @param eventName Name of event.
-     * @param eventDescription Description of event.
-     * @param eventDate Date of event.
+     * I record the information about for event details.
+     * @param eventName
+     * @param eventDescription
+     * @param eventDate
      */
     public Event(String eventName, String eventDescription, Date eventDate)
     {
@@ -31,35 +19,65 @@ public class Event {
     }
 
     /**
-     * Get name of event.
-     * @return Name of event.
+     * I record the information about for event details.
+     * @param eventName
+     * @param eventDescription
+     * @param eventDate
+     * @param situation
+     * @param waitSituation
+     */
+    public Event(String eventName,String eventDescription, Date eventDate,boolean situation,boolean waitSituation)
+    {
+        this.eventName = eventName;
+        this.eventDescription = eventDescription;
+        this.eventDate = eventDate;
+        this.situation = situation;
+        this.waitSituation = waitSituation;
+    }   
+
+
+    /**
+     * Determines whether the event added by the student should be canceled or not.
+     * @param waitSituation
+     */
+    public void setWaitSituation(boolean waitSituation) {
+        this.waitSituation = waitSituation;
+    }
+
+    public boolean getwaitSituation() {
+        return waitSituation;
+    }
+
+    public void setSituation(boolean situation) {
+        this.situation = situation;
+    }
+
+    public boolean getSituation(){
+        return situation;
+    }
+
+    /**
+     * return the event name.
+     * @return
      */
     public String getEventName()
     {
         return eventName;
     }
 
-    /**
-     * Set name of event.
-     * @param eventName Name of event
-     */
     public void setEventName(String eventName)
     {
         this.eventName = eventName;
     }
 
-    /**
-     * Get description of event.
-     * @return Description of event.
-     */
     public String getEventDescription()
     {
         return eventDescription;
     }
 
     /**
-     * Set description of event.
-     * @param eventDescription Description of event.
+     * It defines the event date.
+     * @param eventDescription
      */
     public void setEventDescription(String eventDescription)
     {
@@ -67,32 +85,46 @@ public class Event {
     }
 
     /**
-     * Get date of event.
-     * @return Date of event.
+     * It defines the event date.
+     * @return
      */
     public Date getEventDate()
     {
         return eventDate;
     }
 
-    /**
-     * Set date of event.
-     * @param eventDate Date of event.
-     */
     public void setEventDate(Date eventDate)
     {
         this.eventDate = eventDate;
     }
 
     /**
-     * toString method of Event class.
-     * @return String of Event.
+     * toStirng for event specify
      */
     public String toString()
     {
         return  "Event Date: " + getEventDate().toString() +
                 " Event Name: " + getEventName() +
-                " Event Description: " + getEventDescription() + "\n";
+                " Event Description: " + getEventDescription() + 
+                "Event Situation: " + getSituation() +
+                "Event Wait Situation" + getwaitSituation();
     }
-}
 
+	@Override
+	public int compareTo(Event o) {
+        if(getEventDate().getYear() < o.getEventDate().getYear())
+            return -1;
+        else if(getEventDate().getYear() > o.getEventDate().getYear())
+            return 1;
+        if(getEventDate().getMonth() < o.getEventDate().getMonth())
+            return -1;
+        else if(getEventDate().getMonth() > o.getEventDate().getMonth())
+            return 1;
+        if(getEventDate().getDay() < o.getEventDate().getDay())
+            return -1;
+        else if(getEventDate().getDay() > o.getEventDate().getDay())
+            return 1;
+
+        return 0;		
+	}
+}
