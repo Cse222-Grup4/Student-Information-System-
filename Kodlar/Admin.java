@@ -50,7 +50,6 @@ public class Admin extends Officer {
 
 		return null;
 	}
-
 	public boolean addOfficer(Officer newOfficer)
 	{
 		// Registers officer by using Array List's add method.
@@ -99,7 +98,7 @@ public class Admin extends Officer {
 		return success;
 	}
 
-	public void menu()//scanner.nexInt() ler sıkıntı cıkartıyordu sildim. Ugur
+	public void menu()//scanner.nexInt() ler sÄ±kÄ±ntÄ± cÄ±kartÄ±yordu sildim. Ugur
 	{
 		int choice, innerChoice, id;
 
@@ -108,7 +107,7 @@ public class Admin extends Officer {
 			System.out.println("0) Exit");
 			System.out.println("1) Add User");
 			System.out.println("2) Remove User");
-			System.out.println("3) Inquire User");
+			System.out.println("3) Inquire Student");
 
 			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
@@ -164,16 +163,16 @@ public class Admin extends Officer {
 					break;
 				case 2:
 					System.out.println("0) Exit");
-					System.out.println("1) Remove User");
+					System.out.println("1) Remove Officer");
 					innerChoice = scanner.nextInt();
 
 					switch (innerChoice) {
 						case 0:
 							break;
 						case 1:
-							System.out.println("Enter id");
+			        		System.out.println("Enter officer id: ");
 							id = scanner.nextInt();
-							//remove func database
+							db.getOfficers().remove(db.findOfficersWID(id));
 							break;
 						default:
 							break;
@@ -181,7 +180,7 @@ public class Admin extends Officer {
 					break;
 				case 3:
 					System.out.println("0) Exit");
-					System.out.println("1) Inquire User");
+					System.out.println("1) Inquire Student");
 					innerChoice = scanner.nextInt();
 
 					switch (innerChoice) {
@@ -190,8 +189,13 @@ public class Admin extends Officer {
 						case 1:
 							System.out.println("Enter id");
 							id = scanner.nextInt();
-
-							//inquire func database
+			        		System.out.println("Enter student id: ");
+			        		if(inquireStudentInformation(id) == null) {
+			        			System.out.println("Student couldn't found!");
+			        		}
+			        		else {
+			        			System.out.println(inquireStudentInformation(id));
+			        		}
 							break;
 						default:
 							break;
