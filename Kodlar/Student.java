@@ -18,7 +18,7 @@ public class Student extends Person implements Comparable<Student> {
     private ArrayList<Course> currentCourses;
     private ArrayList<ArrayList<Course>> pastCourses;
     private HashMap<String, Integer> Attendance;        // treeset treemap kullan
-    private HashMap<String, Grade> Grades;
+    private TreeMap<String, Grade> Grades;
     private PriorityQueue<Event> eventsToJoin = new PriorityQueue(new Date.EventComparator());
 
     /*
@@ -36,7 +36,7 @@ public class Student extends Person implements Comparable<Student> {
         pastCourses = new ArrayList<ArrayList<Course>>();
 
         entryYear = year;
-        Grades = new HashMap();
+        Grades = new TreeMap<>();
         Attendance = new HashMap<String, Integer>();
 
     }
@@ -56,7 +56,7 @@ public class Student extends Person implements Comparable<Student> {
         return Attendance;
     }
 
-    public HashMap<String, Grade> getGrades()
+    public TreeMap<String, Grade> getGrades()
     {
         return Grades;
     }
