@@ -1,4 +1,8 @@
 id;mail;password;name;surname;department;type;courseIDs
-1001;a@gtu.edu.tr;abc;Ahmet;Ahmet;CSE;0;BIL 101,CSE102
-1002;s@gtu.edu.tr;123;Samet;Samet;CSE;1;CSE222
-1003;sd@gtu.edu.tr;qwe;Serdil;Serdil;math;0;null
+1001;mehmet@gtu.edu.tr;123;Mehmet;Gokturk;CSE;0;CSE 101,CSE 107
+1002;ysa@gtu.edu.tr;123;Yusuf Sinan;Akgul;CSE;0;CSE 102,CSE 108
+1003;altan@gtu.edu.tr;123;Altan;Kaya;CSE;0;MATH 101,MATH 102
+1004;mevlut@gtu.edu.tr;123;Mevlut;Karabulut;CSE;0;PHYS 121,PHYS 151,PHYS 122,PHYS 152
+1005;turan@gtu.edu.tr;123;Turan;Hanci;CSE;0;TUR 101,TUR 102
+1006;orhun@gtu.edu.tr;123;Orhun;Cenbek;CSE;0;HIS 101,HIS 102
+1007;habil@gtu.edu.tr;123;Habil;Kalkan;CSE;1;null
