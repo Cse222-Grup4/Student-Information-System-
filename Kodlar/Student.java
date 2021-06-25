@@ -440,5 +440,15 @@ public class Student extends Person implements Comparable<Student> {
 
         return sb.toString();
     }
+    public boolean isTaken(Course course) {
+    	for(int i=0;i<pastCourses.size();i++) {
+    		for(int j=0;j<pastCourses.get(i).size();j++) {
+    			if(pastCourses.get(i).get(j).equals(course)) {
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
 
 }
