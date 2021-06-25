@@ -3,23 +3,29 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Officer class for represent the behaviors of officers in our system.
+ * This class extends Person abstract class.
+ */
 public class Officer extends Person {
-
-  /**
-   * Constructor with five parameters.
-   * @param name Officer's name.
-   * @param surname Officer's surname.
-   * @param mail Officer's e-mail address.
-   * @param password Officer's account password.
-   * @param ID Officer ID number.
-   */
+	/**
+	 * Database reference type.
+	 */
 	protected DataBase db;
-  	Officer(String name, String surname, String mail, String password, int ID,DataBase db) {
-  		super(mail, password, name, surname, ID);
-    	this.db=db;
-    }
-  
-  
+
+	/**
+	 * Constructor with five parameters.
+	 * @param name Officer's name.
+	 * @param surname Officer's surname.
+	 * @param mail Officer's e-mail address.
+	 * @param password Officer's account password.
+	 * @param ID Officer ID number.
+	 */
+	Officer(String name, String surname, String mail, String password, int ID,DataBase db)
+	{
+		super(mail, password, name, surname, ID);
+		this.db=db;
+	}
 
   	/**
      * Constructor with two parameters.
@@ -37,8 +43,6 @@ public class Officer extends Person {
   	public void printCertificate(Student student) {
   		student.viewTranscript();
   	}
-
-  
 
   	/**
   	* Inquire student information by Student ID
@@ -105,51 +109,42 @@ public class Officer extends Person {
 
         br.readLine();
 
-        while((line = br.readLine()) != null){
-
-            if(situation == 1){
-                if(line.contains(orderEvent)){
+        while ((line = br.readLine()) != null) {
+            if (situation == 1) {
+                if (line.contains(orderEvent)) {
                     writer.write(line + "\n");
                     writer.write("Situation: CONFIRM ORDER "+ "\n");
                     br.readLine();
-                
                 }
-
-                else {
+                else
                     writer.write(line + "\n");
-                }
             }
-        
-            else if(situation == 0){
-                if(line.contains(orderEvent)){
-
+            else if (situation == 0) {
+                if (line.contains(orderEvent)) {
                     writer.write(line+"\n" );
                     writer.write("Situation: CANCELLED ORDER" + "\n");
                     br.readLine();
                 }
-            
-                else{
+                else
                     writer.write(line + "\n");
-                }
-                
             }
-        
-
         }
             br.close();
             writer.close();
             events.delete();
             temp.renameTo(events);
-        
     }
+
   	/**
   	 * menu for Officer
   	 * @throws Exception it throws an exception if the file cannot be opened.
   	 */
-    public void menu()throws Exception{
-    	int choice,id;
+    public void menu() throws Exception
+	{
+    	int choice, id;
     	boolean flag=true;
-    	while(flag) {
+
+    	while (flag) {
     		System.out.println("0-) Exit");
     		System.out.println("1-) Inquire Student information with student id");
     		System.out.println("2-) View transcript");
@@ -160,6 +155,7 @@ public class Officer extends Person {
     		@SuppressWarnings("resource")
 			Scanner input = new Scanner(System.in);
 	        choice = Integer.parseInt(input.nextLine());
+
 	        switch (choice) {
 	        	case 0:
 	        		flag=false;
@@ -212,29 +208,26 @@ public class Officer extends Person {
 	        	default:
 	        		System.out.println("Please choose from the menu");
 	        		break;
-	        		
 	        }
 	    }
     }
+
     /**
      * Shows the events in the event.txt file
      * @throws IOException it throws an exception if the file cannot be opened.
      */
-    public void showEvents()throws IOException{
-
+    public void showEvents() throws IOException
+	{
         Queue<String>record = new LinkedList<String>();
         String line = "";
 
         BufferedReader br = new BufferedReader(new FileReader("src/events.txt"));
-
         br.readLine();
 
-        while((line = br.readLine()) != null){
+        while ((line = br.readLine()) != null)
             record.add(line + "\n");
-        }
     
         br.close();
-
         System.out.println(record);
     }
 
@@ -243,14 +236,11 @@ public class Officer extends Person {
      * @param eventOrder event name
      * @throws IOException it throws an exception if the file cannot be opened.
      */
-    public void addEvent(String eventOrder) throws IOException{
-      
+    public void addEvent(String eventOrder) throws IOException
+	{
         BufferedWriter writer = new BufferedWriter(new FileWriter("src/events.txt",true));
         writer.write("\n"+eventOrder+"\n");
         writer.write("NOT CHECKED");
         writer.close();
-    
     }
-  
-  
 }
