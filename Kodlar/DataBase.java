@@ -511,7 +511,6 @@ public class DataBase {
             String parts[] = line.split(",");
         	String date = parts[2];
             String parts2[] = date.split("/");
-            System.out.println(parts2[2]);
             Date temp = new Date(Integer.parseInt(parts2[0]),Integer.parseInt(parts2[1]),Integer.parseInt(parts2[2]));
             events.offer(new Event(parts[0],parts[1],temp,Integer.parseInt(parts[3]) == 1,Integer.parseInt(parts[4])==1));
             
