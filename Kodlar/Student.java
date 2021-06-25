@@ -57,11 +57,6 @@ public class Student extends Person implements Comparable<Student> {
     private TreeMap<String, Grade> Grades;
 
     /**
-     * Join the events of student.
-     */
-    private PriorityQueue<Event> eventsToJoin = new PriorityQueue(new Date.EventComparator());
-
-    /**
      * Constructor with 6 parameters.
      * @param mail Mail of student.
      * @param password Password of student.
@@ -225,23 +220,6 @@ public class Student extends Person implements Comparable<Student> {
     {
         this.db = db;
     }
-
-    /*
-    public void addEvent(Event e)
-    {
-        // Officier.approveEvent(e);
-    }
-    */
-
-    /**
-     * Join event method.
-     * @param e An event.
-     */
-    public void joinEvent(Event e)
-    {
-        eventsToJoin.add(e);
-    }
-
     /**
      * Course selection method of a student.
      */
@@ -315,12 +293,13 @@ public class Student extends Person implements Comparable<Student> {
                     courseSelection();
                     break;
                 case 7:
-                    System.out.println("Enter event");
-                    String eventOrder = kb.nextLine();
-                    // enter description
-                    // enter date
-                    // Event = new Event(name, description, date);
-                    addEvent(eventOrder);
+                    System.out.println("Enter event name");
+                    String name = kb.nextLine();
+                    System.out.println("Enter event description");
+                    String description = kb.nextLine();
+                    System.out.println("Enter event date (ex: 25/11/2019):");
+                    String date = kb.nextLine();
+                    addEvent(name,description,date);
                     break;
                 case 8:
                     showEvents();
@@ -444,25 +423,6 @@ public class Student extends Person implements Comparable<Student> {
             e.printStackTrace();
         }
     }
-
-    /**
-     * View all events.
-     * @param events Events objects.
-     */
-    public void viewEvents(PriorityQueue<Event> events)
-    {
-        PriorityQueue<Event> copyEvents = new PriorityQueue<Event>();
-
-        while (!events.isEmpty()) {
-            Event e = events.poll();
-            System.out.println(e);
-            copyEvents.add(e);
-        }
-
-        while (!copyEvents.isEmpty())
-            events.add(copyEvents.poll());
-    }
-
     /**
      * Add grade of student.
      * @param courseCode Course code of course.
@@ -495,16 +455,10 @@ public class Student extends Person implements Comparable<Student> {
      * Add an event method.
      * @param eventOrder Event order of event.
      */
-    public void addEvent(String eventOrder)
-    {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src/events.txt",true));
-            writer.write("\n"+eventOrder+"\n");
-            writer.write("NOT CHECKED");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void addEvent(String name,String description,String date)
+    {   
+        String [] parts = date.split("/");
+        db.getEvents().offer(new Event(name,description,new Date(Integer.parseInt(parts[0]),Integer.parseInt(parts[1]),Integer.parseInt(parts[2]))));
     }
 
     /**
@@ -512,22 +466,12 @@ public class Student extends Person implements Comparable<Student> {
      */
     public void showEvents()
     {
-        Queue<String>record = new LinkedList<String>();
-        String line = "";
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("src/events.txt"));
-            br.readLine();
-
-            while((line = br.readLine()) != null)
-                record.add(line + "\n");
-
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Iterator<Event> iter = db.getEvents().iterator();
+        
+        while(iter.hasNext()){
+            System.out.println(iter.next());
         }
 
-        System.out.println(record);
     }
 
     /**
