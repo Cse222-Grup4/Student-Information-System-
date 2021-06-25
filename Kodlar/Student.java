@@ -135,7 +135,7 @@ public class Student extends Person implements Comparable<Student> {
 
     public void courseSelection()
     {
-        if (currentCourses.size()>0) {
+        if (courseSelectionApprove == true) {
             System.out.println("You cannot select courses.");
             return;
         }
