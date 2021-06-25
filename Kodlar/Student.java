@@ -74,7 +74,7 @@ public class Student extends Person implements Comparable<Student> {
         entryYear = year;
         Grades = new TreeMap<>();
         Attendance = new HashMap<String, Integer>();
-
+        setDepartment("CSE");
     }
 
     /**
@@ -243,8 +243,12 @@ public class Student extends Person implements Comparable<Student> {
             if (s.equals("q"))
                 break;
 
-            if (db.findCourseWID(s) != null)
+            if (db.findCourseWID(s) != null){
                 currentCourses.add(db.findCourseWID(s));
+                Attendance.put(s,0);
+                Grades.put(s,new Grade(0,0,0));
+                db.findCourseWID(s).addStudent(this);
+            }
             else
                 System.out.println("There isn't any course with this id.");
         }
