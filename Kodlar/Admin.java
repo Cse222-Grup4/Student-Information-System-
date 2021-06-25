@@ -156,7 +156,7 @@ public class Admin extends Officer {
 						case 3:
 							System.out.println("Enter department");
 							String department=scanner.nextLine();
-							addTeacher(new Teacher(name, surname, mail, password, id,department,db));
+							addTeacher(new Teacher(mail,password,name,surname,id,department,db));
 							break;
 						default:
 							break;
