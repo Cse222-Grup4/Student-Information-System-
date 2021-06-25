@@ -14,6 +14,7 @@ public class DataBase {
     private Queue<Event> events;
     private ArrayList<Curriculum> curriculums;
     private Admin admin;
+	private HashMap <String ,ListGraph> connectedCourses;
     private String teachersFilePath = "src/teachers.txt";
     private String officersFilePath = "src/officers.txt";
 
@@ -37,6 +38,7 @@ public class DataBase {
             readStudentFile();
             importOfficersFromFile();
 			appendAdvisors();
+			connectedCourses = new HashMap<>();
             //readUsersFile(); silinmis
 
             //writeStudentFile();
