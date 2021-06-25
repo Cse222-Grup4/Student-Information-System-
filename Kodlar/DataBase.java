@@ -523,9 +523,21 @@ public class DataBase {
 
         while(iter.hasNext()){
             Event temp = iter.next();
-            file.write(temp.getEventName() + ","+ temp.getEventDescription()+ ","+ temp.getEventDate()+ ","+temp.getSituation()+ ","+temp.getwaitSituation()+"\n");
+            file.write(temp.getEventName() + ","+ temp.getEventDescription()+ ","+ temp.getEventDate()+",");
+            if(temp.getSituation()) {
+            	file.write("1,");
+            }
+            else {
+            	file.write("0,");
+            }
+            if(temp.getwaitSituation()) {
+            	file.write("1\n");
+            }
+            else {
+            	file.write("0\n");
+            }
         }
-		file.close();
+    	file.close();
     }
 	public PriorityQueue<Event> getEvents(){return events;}
 	    
