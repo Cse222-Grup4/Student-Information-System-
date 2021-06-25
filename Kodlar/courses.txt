@@ -1,3 +1,14 @@
-8;BIL 101;Bilgisayara Giris;9
-7;CSE102;C Programlama;7
-5;CSE222;Data Structures;8
+1;CSE 101;Introduction to Computer Engineering and Career Planning;8;CSE;NULL
+1;CSE 107;Introduction To Computer Science Laboratory;2;CSE;NULL
+1;MATH 101;Calculus I;7;CSE;NULL
+1;PHYS 121;Physics I;6;CSE;NULL	
+1;PHYS 151;Physics Laboratory I;1;CSE;NULL
+1;HIS 101;Principles of Ataturk And The History of Turkish Revolution I;2;CSE;NULL
+1;TUR 101;Turkish I;2;CSE;NULL
+2;CSE 102;Computer Programming;8;CSE;CSE 101
+2;CSE 108;Computer Programming Laboratory;2;CSE;CSE 107
+2;MATH 102;Calculus II;7;CSE;MATH 101
+2;PHYS 122;Physics II;6;CSE;PHYS 121
+2;PHYS 152;Physics Laboratory II;1;CSE;PHYS 151
+2;HIS 102;Principles of Ataturk And The History of Turkish Revolution II;2;CSE;NULL
+2;TUR 102;Turkish II;2;CSE;NULL
