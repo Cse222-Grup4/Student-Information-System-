@@ -1,34 +1,75 @@
 import java.io.*;
 import java.util.*;
 
-/*
-do:
-    CSE.TXT dosyasi => BILAL
-    students.txt dosyasi => berkcan
-    officier menu database - student ctor
-*/
-
+/**
+ * Student class for represent the behaviors of student in our system.
+ * This class extends Person abstract class
+ */
 public class Student extends Person implements Comparable<Student> {
+    /**
+     * Object of database.
+     */
     private DataBase db;
+
+    /**
+     * Advisor teacher id of student.
+     */
     private int advisorTeacherID;
+
+    /**
+     * Entry year of student.
+     */
     private int entryYear;
+
+    /**
+     * Term of student.
+     */
     private int term;
+
+    /**
+     * Department of student.
+     */
     private String department;
+
+    /**
+     * Course selection approve of student.
+     */
     private boolean courseSelectionApprove;
+
+    /**
+     * Current courses of student.
+     */
     private ArrayList<Course> currentCourses;
+
+    /**
+     * Past courses of student.
+     */
     private ArrayList<ArrayList<Course>> pastCourses;
-    private HashMap<String, Integer> Attendance;        // treeset treemap kullan
+
+    /**
+     * Attendance of student.
+     */
+    private HashMap<String, Integer> Attendance;
+
+    /**
+     * Grades of student.
+     */
     private TreeMap<String, Grade> Grades;
+
+    /**
+     * Join the events of student.
+     */
     private PriorityQueue<Event> eventsToJoin = new PriorityQueue(new Date.EventComparator());
 
-    /*
-    Student(String mail,String password)
-    {
-        super(mail,password);
-        courses = new ArrayList<>();
-    }
-    */
-
+    /**
+     * Constructor with 6 parameters.
+     * @param mail Mail of student.
+     * @param password Password of student.
+     * @param name Name of student.
+     * @param surname Surname of student.
+     * @param id Id of student.
+     * @param year Year of student.
+     */
     Student(String mail,String password,String name,String surname,int id, int year)
     {
         super(mail, password, name, surname, id);
@@ -41,81 +82,145 @@ public class Student extends Person implements Comparable<Student> {
 
     }
 
+    /**
+     * Get current courses of student.
+     * @return Current courses of student.
+     */
     public ArrayList<Course> getCurrentCourses()
     {
         return currentCourses;
     }
 
+    /**
+     * Get past courses of student.
+     * @return Past courses of student.
+     */
     public ArrayList<ArrayList<Course>> getPastCourses()
     {
         return pastCourses;
     }
 
+    /**
+     * Get attendance of student.
+     * @return Attendance of student.
+     */
     public HashMap<String,Integer> getAttendance()
     {
         return Attendance;
     }
 
+    /**
+     * Get grades of student.
+     * @return Grades of student.
+     */
     public TreeMap<String, Grade> getGrades()
     {
         return Grades;
     }
 
+    /**
+     * Set advisor teacher id of student.
+     * @param id Advisor teacher id of student.
+     */
     public void setAdvisorTeacherID(int id)
     {
         advisorTeacherID = id;
     }
 
+    /**
+     * Get advisor teacher id of student.
+     * @return Advisor teacher id of student.
+     */
     public int getAdvisorTeacherID()
     {
         return advisorTeacherID;
     }
 
+    /**
+     * Set term of student.
+     * @param term Term of student.
+     */
     public void setTerm(int term)
     {
         this.term = term;
     }
 
+    /**
+     * Get term of student.
+     * @return Term of student.
+     */
     public int getTerm()
     {
         return term;
     }
 
+    /**
+     * Set department of student.
+     * @param department Department of student.
+     */
     public void setDepartment(String department)
     {
         this.department = department;
     }
 
+    /**
+     * Get department of student.
+     * @return Department of student.
+     */
     public String getDepartment()
     {
         return department;
     }
 
+    /**
+     * Is course selection approve the student.
+     * @return Course selection approve of student.
+     */
     public boolean getCourseSelectionApprove()
     {
         return courseSelectionApprove;
     }
 
+    /**
+     * Set course selection approve the student.
+     * @param courseSelectionApprove Course selection approve of student.
+     */
     public void setCourseSelectionApprove(boolean courseSelectionApprove)
     {
         this.courseSelectionApprove = courseSelectionApprove;
     }
 
+    /**
+     * Get courses of student.
+     * @return Courses of student.
+     */
     public ArrayList<Course> getCourses()
     {
         return currentCourses;
     }
 
+    /**
+     * Set courses of student.
+     * @param currentCourses Courses of student.
+     */
     public void setCourses(ArrayList<Course> currentCourses)
     {
         this.currentCourses = currentCourses;
     }
 
+    /**
+     * Get entry year of student.
+     * @return Entry year of student.
+     */
     public int getEntryYear()
     {
         return entryYear;
     }
 
+    /**
+     * Set database object of this.
+     * @param db Database object.
+     */
     public void setDb(DataBase db)
     {
         this.db = db;
@@ -128,11 +233,18 @@ public class Student extends Person implements Comparable<Student> {
     }
     */
 
+    /**
+     * Join event method.
+     * @param e An event.
+     */
     public void joinEvent(Event e)
     {
         eventsToJoin.add(e);
     }
 
+    /**
+     * Course selection method of a student.
+     */
     public void courseSelection()
     {
         if (courseSelectionApprove == true) {
@@ -160,6 +272,9 @@ public class Student extends Person implements Comparable<Student> {
         }
     }
 
+    /**
+     * Menu method for student class.
+     */
     public void menu()
     {
         for (;;) {
@@ -173,9 +288,6 @@ public class Student extends Person implements Comparable<Student> {
             System.out.println("6) Select Courses");
             System.out.println("7) Add Event");
             System.out.println("8) Show Event");
-            // etkinlik ekle
-            // etkinlik goruntule
-
 
             Scanner kb = new Scanner(System.in);
             int choice = Integer.parseInt(kb.nextLine());
@@ -219,6 +331,9 @@ public class Student extends Person implements Comparable<Student> {
         }
     }
 
+    /**
+     * View transcript of student.
+     */
     public void viewTranscript()
     {
         int year = entryYear;
@@ -261,6 +376,9 @@ public class Student extends Person implements Comparable<Student> {
         System.out.println("\n//////////////////////////////////////////////////////////////////////////////////////\n");
     }
 
+    /**
+     * View grades of student.
+     */
     public void viewGrades()
     {
         System.out.println("\nCurrent Courses:");
@@ -275,10 +393,12 @@ public class Student extends Person implements Comparable<Student> {
                     " | Project: " + Grades.get(currentCourses.get(i).getCourseCode()).getProjectGrade() +
                     " | Total Grade: " + Grades.get(currentCourses.get(i).getCourseCode()).getTotalGrade() +
                     " | Name: " + currentCourses.get(i).getCourseName());
-        //System.out.println(Grades.get(currentCourses.get(i));
     }
 
-    // viewing the grade of single course, the course id is given with parameter
+    /**
+     * View course grades of student.
+      * @param courseCode Course code of course.
+     */
     public void viewCourseGrades(String courseCode){
         if(Grades.get(courseCode) == null)
             System.out.println("No grade for student");
@@ -286,6 +406,9 @@ public class Student extends Person implements Comparable<Student> {
             System.out.println("      " + Grades.get(courseCode));
     }
 
+    /**
+     * View attendance of student.
+     */
     public void viewAttendance()
     {
         for (int i = 0; i < currentCourses.size(); ++i) {
@@ -301,6 +424,9 @@ public class Student extends Person implements Comparable<Student> {
         }
     }
 
+    /**
+     * View curriculum of a student.
+     */
     public void viewCurriculum()
     {
         try {
@@ -319,6 +445,10 @@ public class Student extends Person implements Comparable<Student> {
         }
     }
 
+    /**
+     * View all events.
+     * @param events Events objects.
+     */
     public void viewEvents(PriorityQueue<Event> events)
     {
         PriorityQueue<Event> copyEvents = new PriorityQueue<Event>();
@@ -333,7 +463,12 @@ public class Student extends Person implements Comparable<Student> {
             events.add(copyEvents.poll());
     }
 
-    // pre: should be mapping for the keys(course codes)
+    /**
+     * Add grade of student.
+     * @param courseCode Course code of course.
+     * @param grade Grade of student.
+     * @param type Type of exam.
+     */
     public void addGrade(String courseCode,int grade,int type)
     {
         if(Grades.get(courseCode) == null)
@@ -345,7 +480,9 @@ public class Student extends Person implements Comparable<Student> {
         }
     }
 
-
+    /**
+     * Finish semester method.
+     */
     public void endOfSemester()
     {
         pastCourses.add(new ArrayList<Course>(currentCourses));
@@ -354,6 +491,10 @@ public class Student extends Person implements Comparable<Student> {
         courseSelectionApprove = false;
     }
 
+    /**
+     * Add an event method.
+     * @param eventOrder Event order of event.
+     */
     public void addEvent(String eventOrder)
     {
         try {
@@ -364,16 +505,16 @@ public class Student extends Person implements Comparable<Student> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
+    /**
+     * Show all events.
+     */
     public void showEvents()
     {
-
         Queue<String>record = new LinkedList<String>();
         String line = "";
-        
+
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/events.txt"));
             br.readLine();
@@ -386,24 +527,36 @@ public class Student extends Person implements Comparable<Student> {
             e.printStackTrace();
         }
 
-
         System.out.println(record);
     }
 
+    /**
+     * compareTo method of Student class.
+     * @param o A student object.
+     * @return Result of compare.
+     */
     @Override
     public int compareTo(Student o)
     {
         return Integer.compare(getUserID(),o.getUserID());
     }
 
+    /**
+     * toString method of Student class.
+     * @return String of student.
+     */
     public String toString()
     {
-        return "isim: " + getUserName() + " soyisim: " + getUserSurname() + " mail: " +
-                getUserMail() + " sifre: " + getUserPassword() + " user id: " + getUserID()
-                + " advisor id: " + getAdvisorTeacherID() + " department: "  + getDepartment()
-                + " term: " + getTerm() + " ders durumu: " + getCourseSelectionApprove();
+        return "Name: " + getUserName() + " Surname: " + getUserSurname() + " Mail: " +
+                getUserMail() + " Password: " + getUserPassword() + " User-id: " + getUserID()
+                + " Advisor-id: " + getAdvisorTeacherID() + " Department: "  + getDepartment()
+                + " Term: " + getTerm() + " Course-Selection: " + getCourseSelectionApprove();
     }
 
+    /**
+     * Import students to file.
+     * @return String of student.
+     */
     public String studentToFile()
     {
 
@@ -429,7 +582,6 @@ public class Student extends Person implements Comparable<Student> {
             for (int k = 0; k < pastCourses.get(i).size(); ++k) {
                 sb.append(pastCourses.get(i).get(k).getCourseCode()).append('.').append(Grades.get(pastCourses.get(i).get(k).getCourseCode()).getPastTotalGrade());
 
-                // sondaki iki nokta iyilestirilecek
                 if (k == pastCourses.get(i).size() - 1)
                     sb.append(':');
                 else
@@ -440,15 +592,19 @@ public class Student extends Person implements Comparable<Student> {
 
         return sb.toString();
     }
-    public boolean isTaken(Course course) {
-    	for(int i=0;i<pastCourses.size();i++) {
-    		for(int j=0;j<pastCourses.get(i).size();j++) {
-    			if(pastCourses.get(i).get(j).equals(course)) {
-    				return true;
-    			}
-    		}
-    	}
-    	return false;
-    }
 
+    /**
+     * Checks whether a course has been taken or not.
+     * @param course Check the course.
+     * @return True or false.
+     */
+    public boolean isTaken(Course course)
+    {
+        for(int i=0;i<pastCourses.size();i++)
+            for(int j=0;j<pastCourses.get(i).size();j++)
+                if(pastCourses.get(i).get(j).equals(course))
+                    return true;
+
+        return false;
+    }
 }
