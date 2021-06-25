@@ -52,18 +52,6 @@ public abstract class Person implements User {
     }
 
     /**
-     * Login method of system.
-     * @param mail The mail of person.
-     * @param password The password of person.
-     * @return
-     */
-    @Override
-    public boolean login(String mail, String password)
-    {
-        return (getUserMail().equals(mail) && getUserPassword().equals(password));
-    }
-
-    /**
      * Set name of person.
      * @param name Name of person.
      */
