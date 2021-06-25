@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Iterator;
+import java.util.Scanner;
 public class AdvisorTeacher extends Teacher {
 
 	private BinarySearchTree<Student> students;
@@ -74,19 +74,10 @@ public class AdvisorTeacher extends Teacher {
     	return students;
     }
     
-    private Student getStudent(int studentID,BinaryTree<Student> students) {
+    private Student getStudent(int studentID,BinarySearchTree<Student> students) {
     	try {
-        	if(students.getData().getUserID() == studentID) {
-        		return students.getData();
-        	}
-        	if(students.getData().getUserID() > studentID) {
-        		getStudent(studentID,students.getLeftSubtree());
-        	}
-        	else {
-        		getStudent(studentID,students.getRightSubtree());
-        	}
-        	return null;
-    		}
+    		return students.find(database.findStudentWID(studentID));
+    	}
     		catch(Exception e) {
     		  return null;
     		}
