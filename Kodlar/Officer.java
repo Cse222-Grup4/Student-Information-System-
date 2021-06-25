@@ -103,41 +103,18 @@ public class Officer extends Person {
   	 * @param orderEvent event name
   	 * @throws IOException it throws an exception if the file cannot be opened.
   	 */
-  	public void confirmCancelEvents(int situation,String orderEvent) throws IOException
-	{
-        File events = new File("src/events.txt");
-        File temp = new File("deleted.txt");
-        String line;
-        temp.createNewFile();
-        BufferedReader br = new BufferedReader(new FileReader("src/events.txt"));
-        BufferedWriter writer = new BufferedWriter(new FileWriter("deleted.txt"));
-
-        br.readLine();
-
-        while ((line = br.readLine()) != null) {
-            if (situation == 1) {
-                if (line.contains(orderEvent)) {
-                    writer.write(line + "\n");
-                    writer.write("Situation: CONFIRM ORDER "+ "\n");
-                    br.readLine();
-                }
-                else
-                    writer.write(line + "\n");
-            }
-            else if (situation == 0) {
-                if (line.contains(orderEvent)) {
-                    writer.write(line+"\n" );
-                    writer.write("Situation: CANCELLED ORDER" + "\n");
-                    br.readLine();
-                }
-                else
-                    writer.write(line + "\n");
-            }
-        }
-            br.close();
-            writer.close();
-            events.delete();
-            temp.renameTo(events);
+  	public void confirmCancelEvents(int situation,String eventName){
+  		Event eventTemp;
+  		Iterator<Event> iter = db.getEvents().iterator();
+  		while(iter.hasNext()) {
+  			eventTemp = iter.next();
+  			if(eventTemp.getEventName().equals(eventName)){
+  				eventTemp.setSituation(situation == 1);
+  				eventTemp.setWaitSituation(situation != 1);
+  				return;
+  			}
+  		}
+  		System.out.println("Event couldn't found!");
     }
 
   	/**
@@ -201,12 +178,12 @@ public class Officer extends Person {
 	        		// STUDENTS.TXT
 	        		break;
 	        	case 4:
-	        		System.out.println("Enter Event Sitition:");
-	        		int sitition=Integer.parseInt(input.nextLine());
-	        		System.out.println("Enter event name");
-	        		String eventName=input.nextLine();
+					System.out.println("Enter event name");
+					String eventName=input.nextLine();
+					System.out.println("Enter Event Sitition(ex: 1 or 0):");
+					int sitition=Integer.parseInt(input.nextLine());
 	        		confirmCancelEvents(sitition, eventName);
-	        		break;
+					break;
 	        	case 5:
 	        		showEvents();
 	        		break;
@@ -226,19 +203,12 @@ public class Officer extends Person {
      * Shows the events in the event.txt file
      * @throws IOException it throws an exception if the file cannot be opened.
      */
-    public void showEvents() throws IOException
-	{
-        Queue<String>record = new LinkedList<String>();
-        String line = "";
-
-        BufferedReader br = new BufferedReader(new FileReader("src/events.txt"));
-        br.readLine();
-
-        while ((line = br.readLine()) != null)
-            record.add(line + "\n");
-    
-        br.close();
-        System.out.println(record);
+    public void showEvents()throws IOException{
+        Iterator<Event> iter = db.getEvents().iterator();
+        
+        while(iter.hasNext()){
+            System.out.println(iter.next());
+        }
     }
 
     /**
