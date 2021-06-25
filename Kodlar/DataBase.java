@@ -28,7 +28,7 @@ public class DataBase {
 			connectedCourses = new HashMap<>();
             admin = new Admin("admin","admin","admin@gtu.edu.tr","admin",1,this);
 
-            readCourses("src/courses.txt");
+            readCourses("courses.txt");
             readTeachersFile();
             readStudentFile();
             importOfficersFromFile();
@@ -332,7 +332,7 @@ public class DataBase {
     public boolean writeStudentFile()
     {
         try {
-            FileWriter file = new FileWriter("src/students.txt");
+            FileWriter file = new FileWriter("students.txt");
 
 
             for (int i = 0; i < students.size(); ++i) {
@@ -350,7 +350,7 @@ public class DataBase {
     public boolean readStudentFile(){
         // reader for read teachers file
         try{
-            FileReader myObj = new FileReader("src/students.txt");
+            FileReader myObj = new FileReader("students.txt");
             BufferedReader bufferedReader = new BufferedReader(myObj);
 
             String line;
@@ -497,7 +497,7 @@ public class DataBase {
 	    }
 
 	    private void readEvent() throws IOException{
-        FileReader myObj = new FileReader("src/events.txt");
+        FileReader myObj = new FileReader("events.txt");
         BufferedReader bufferedReader = new BufferedReader(myObj);
         String line;
         while((line = bufferedReader.readLine()) != null){
@@ -512,7 +512,7 @@ public class DataBase {
     }
 
     private void writeEvent() throws IOException{
-        FileWriter file = new FileWriter("src/events.txt");
+        FileWriter file = new FileWriter("events.txt");
        
         Iterator<Event> iter = events.iterator(); 
 
