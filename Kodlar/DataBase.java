@@ -15,8 +15,8 @@ public class DataBase {
     private PriorityQueue<Event> events;
     private Admin admin;
 	private HashMap <String ,ListGraph> connectedCourses;
-    private String teachersFilePath = "src/teachers.txt";
-    private String officersFilePath = "src/officers.txt";
+    private String teachersFilePath = "teachers.txt";
+    private String officersFilePath = "officers.txt";
     DataBase() throws IOException
     {
         try {
@@ -61,12 +61,17 @@ public class DataBase {
 
                 inputLine = input.nextLine();
                 choice = Integer.parseInt(inputLine);
-
                 switch (choice) {
-                    case 1 -> signIn();
-                    case 0 -> System.out.println("Thanks for using Student Information System. Have a nice day!");
-                    default -> System.out.println("Please select from menu\n");
-                }
+                case 1:
+                    signIn();
+                    break;
+                case 0:
+                    System.out.println("Thanks for using Student Information System. Have a nice day!");
+                    break;
+                default:
+                    System.out.println("Please select from menu\n");
+                    break;
+            }
             } while (choice != 0);
 			writeStudentFile();
             writeTeachersFile();
