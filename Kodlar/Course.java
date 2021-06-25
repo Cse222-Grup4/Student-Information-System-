@@ -9,6 +9,8 @@ public class Course implements Comparable<Course>  {
     private int credit;
     private ArrayList<Student> students = new ArrayList<>();
     private final int TotalCourses = 30;
+    private String linkedCourse = null;
+    private String department;
 
         /*private int numOfAttendance = 0;
     private int numOfAbsent = 0;
@@ -168,6 +170,14 @@ public class Course implements Comparable<Course>  {
     public int compareTo(Course o) {
         return Integer.compare(getCredit(),o.getCredit());
     }
+    public String getLinkedCourse() {return linkedCourse;}
+    public String getDepartment(){
+        return department;
+    }
+    public void setDepartment(String department){
+    	this.department = department;
+    }
+    public void setLinkedCourse(String course) {linkedCourse = course;}
     
     
 }
