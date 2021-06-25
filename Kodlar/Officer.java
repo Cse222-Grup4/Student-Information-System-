@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.io.*;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Iterator;
 
 /**
  * Officer class for represent the behaviors of officers in our system.
