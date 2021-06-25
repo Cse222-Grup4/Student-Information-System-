@@ -148,7 +148,6 @@ public class DataBase {
             ));
         }
     }
-
     /**
      * Appends an officer to end of text file which is storing officers.
      * @param o Officer object
@@ -361,47 +360,50 @@ public class DataBase {
                 HashMap<String, Grade> tempGrades = new HashMap();*/
 
                 String parts[] = line.split(";");
+
                 Student tempStudent = new Student(parts[2], parts[3], parts[0], parts[1], Integer.parseInt(parts[4]), Integer.parseInt(parts[6]));
                 tempStudent.setAdvisorTeacherID(Integer.parseInt(parts[5]));
                 tempStudent.setTerm(Integer.parseInt(parts[7]));
                 tempStudent.setDepartment(parts[8]);
                 tempStudent.setCourseSelectionApprove(Boolean.parseBoolean(parts[9]));
-                String tempCourses[] = parts[10].split(",");
-
-                for(int i = 0;i < tempCourses.length;i++){
-                    String tempCurrentCourse[] = tempCourses[i].split("\\.");
-                    for(int j = 0;j < courses.size();j++){
-                        if(courses.get(j).getCourseCode().equals(tempCurrentCourse[0])){
-                            tempStudent.getCurrentCourses().add(courses.get(j));
-                            break;
-                        }
-                    }
-                    tempStudent.getAttendance().put(tempCurrentCourse[0], Integer.parseInt(tempCurrentCourse[1]));
-                    tempStudent.getGrades().put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[2]), Integer.parseInt(tempCurrentCourse[3]), Integer.parseInt(tempCurrentCourse[4])));
-
-                    /*tempAttendance.put(tempCurrentCourse[0],tempCurrentCourse[1]);
-                    tempGrades.put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[2]), Integer.parseInt(tempCurrentCourse[3]), Integer.parseInt(tempCurrentCourse[4])));*/
-                }
-
-                tempCourses = parts[11].split(":");
-                for(int i = 0;i < tempCourses.length;i++){
-                    String tempCurrentCourses[] = tempCourses[i].split(",");
-                    ArrayList<Course> t_arr = new ArrayList<Course>();
-                    for(int t = 0;t < tempCurrentCourses.length;t++){
-                        String tempCurrentCourse[] = tempCurrentCourses[t].split("\\.");
-
+                if(!(parts.length<11)) {
+                	String tempCourses[] = parts[10].split(",");
+                    for(int i = 0;i < tempCourses.length;i++){
+                        String tempCurrentCourse[] = tempCourses[i].split("\\.");
                         for(int j = 0;j < courses.size();j++){
-                            if(courses.get(j).getCourseCode().equals(tempCurrentCourse[0])) {
-                                t_arr.add(courses.get(j));
-                                //tempStudent.getPastCourses().get(i).add(courses.get(j));
-                                tempStudent.getGrades().put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[1])));
+                            if(courses.get(j).getCourseCode().equals(tempCurrentCourse[0])){
+                                tempStudent.getCurrentCourses().add(courses.get(j));
                                 break;
                             }
                         }
+                        tempStudent.getAttendance().put(tempCurrentCourse[0], Integer.parseInt(tempCurrentCourse[1]));
+                        tempStudent.getGrades().put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[2]), Integer.parseInt(tempCurrentCourse[3]), Integer.parseInt(tempCurrentCourse[4])));
+
+                        /*tempAttendance.put(tempCurrentCourse[0],tempCurrentCourse[1]);
+                        tempGrades.put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[2]), Integer.parseInt(tempCurrentCourse[3]), Integer.parseInt(tempCurrentCourse[4])));*/
                     }
-                    tempStudent.getPastCourses().add(t_arr);
+
+                    tempCourses = parts[11].split(":");
+                    for(int i = 0;i < tempCourses.length;i++){
+                        String tempCurrentCourses[] = tempCourses[i].split(",");
+                        ArrayList<Course> t_arr = new ArrayList<Course>();
+                        for(int t = 0;t < tempCurrentCourses.length;t++){
+                            String tempCurrentCourse[] = tempCurrentCourses[t].split("\\.");
+
+                            for(int j = 0;j < courses.size();j++){
+                                if(courses.get(j).getCourseCode().equals(tempCurrentCourse[0])) {
+                                    t_arr.add(courses.get(j));
+                                    //tempStudent.getPastCourses().get(i).add(courses.get(j));
+                                    tempStudent.getGrades().put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[1])));
+                                    break;
+                                }
+                            }
+                        }
+                        tempStudent.getPastCourses().add(t_arr);
+                    }
                 }
                 tempStudent.setDb(this);
+                
                 students.add(tempStudent);
             }
 
@@ -513,7 +515,7 @@ public class DataBase {
             Date temp = new Date(Integer.parseInt(parts2[0]),Integer.parseInt(parts2[1]),Integer.parseInt(parts2[2]));
             events.offer(new Event(parts[0],parts[1],temp,Integer.parseInt(parts[3]) == 1,Integer.parseInt(parts[4])==1));
         }
-			bufferedReader.close();
+        bufferedReader.close();
     }
 
     private void writeEvent() throws IOException{
@@ -540,5 +542,13 @@ public class DataBase {
     	file.close();
     }
 	public PriorityQueue<Event> getEvents(){return events;}
+	
+    public Officer findOfficersWID(int officerID) {
+        for (Officer officer : officers) {
+            if (officer.getUserID() == (officerID))
+                return officer;
+        }
+        return null;
+    }
 	    
 }
