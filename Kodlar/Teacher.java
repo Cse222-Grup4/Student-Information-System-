@@ -421,43 +421,5 @@ public class Teacher extends Person {
                 System.out.println(course.getCourseCode());
         }
         return "";
-
-/*
-        StringBuilder sb = new StringBuilder();
-        if(!isAdvisor)
-            sb.append("Teacher\n");
-        else
-            sb.append("Advisor Teacher\n");
-        sb.append("ID : ");
-        sb.append(getUserID());
-        sb.append("\n");
-        sb.append("Name : ");
-        sb.append(getUserName());
-        sb.append("\n");
-        sb.append("SurName : ");
-        sb.append(getUserSurname());
-        sb.append("\n");
-        sb.append("Mail : ");
-        sb.append(getUserMail());
-        sb.append("\n");
-        sb.append("Password : ");
-        sb.append(getUserPassword());
-        sb.append("\n");
-        sb.append("Department : ");
-        sb.append(getDepartment());
-        sb.append("\n");
-        sb.append("Courses : \n");
-
-        if (courses.size() == 0)
-            sb.append("No course.\n");
-        else {
-            for (Course course : courses) {
-                sb.append(course.getCourseCode());
-                sb.append("\n");
-            }
-        }
-        return sb.toString();
-*/
-
     }
 }
