@@ -75,6 +75,9 @@ public class DataBase {
                     default -> System.out.println("Please select from menu\n");
                 }
             } while (choice != 0);
+			writeStudentFile();
+            writeTeachersFile();
+            exportOfficersList();
         }catch (Exception e){
             System.out.println("!Exception found.!");
             e.printStackTrace();
