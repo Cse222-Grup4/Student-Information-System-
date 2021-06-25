@@ -98,7 +98,7 @@ public class Admin extends Officer {
 		return success;
 	}
 
-	public void menu()//scanner.nexInt() ler sÄ±kÄ±ntÄ± cÄ±kartÄ±yordu sildim. Ugur
+	public void menu()
 	{
 		int choice, innerChoice, id;
 
