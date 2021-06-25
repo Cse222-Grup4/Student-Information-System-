@@ -43,15 +43,24 @@ public class Event implements Comparable<Event>{
     public void setWaitSituation(boolean waitSituation) {
         this.waitSituation = waitSituation;
     }
-
+    /**
+     * Getter function for wait situation.
+     * @return
+     */
     public boolean getwaitSituation() {
         return waitSituation;
     }
-
+    /**
+     * Setter function for situation.
+     * @param situation
+     */
     public void setSituation(boolean situation) {
         this.situation = situation;
     }
-
+    /**
+     * Getter function for situation.
+     * @return
+     */
     public boolean getSituation(){
         return situation;
     }
@@ -64,12 +73,18 @@ public class Event implements Comparable<Event>{
     {
         return eventName;
     }
-
+    /**
+     * Setter function for event name.
+     * @param eventName
+     */
     public void setEventName(String eventName)
     {
         this.eventName = eventName;
     }
-
+    /**
+     * Getter function for event description.
+     * @return
+     */
     public String getEventDescription()
     {
         return eventDescription;
@@ -109,8 +124,11 @@ public class Event implements Comparable<Event>{
                 "Event Situation: " + getSituation() +
                 "Event Wait Situation" + getwaitSituation();
     }
-
 	@Override
+	/**
+	 ** Compare to function for Event class according to dates.
+	 *@return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+	 */
 	public int compareTo(Event o) {
         if(getEventDate().getYear() < o.getEventDate().getYear())
             return -1;
