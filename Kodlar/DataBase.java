@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -26,6 +27,7 @@ public class DataBase {
             courses = new ArrayList<>();
             events = new LinkedList<>();
             curriculums = new ArrayList<>();
+			connectedCourses = new HashMap<>();
             admin = new Admin("admin","admin","admin@gtu.edu.tr","admin",1,this);
 
             readCourses("src/courses.txt");
@@ -34,10 +36,13 @@ public class DataBase {
             importOfficersFromFile();
 			appendAdvisors();
 			QuickSortStudents.sort(students);
-			connectedCourses = new HashMap<>();
-			
+
+            //readUsersFile(); silinmis
+
+            //writeStudentFile();
+
         } catch(IOException io){
-            System.out.println("IOException occurred when reading file.The exception is printing: ");
+            System.out.println("IOException occurred when reading 'teachers.txt' file.The exception is printing: ");
             io.printStackTrace();
             throw io;
         }
@@ -301,12 +306,16 @@ public class DataBase {
             while((line = bufferedReader.readLine()) != null){
                 String parts[] = line.split(";");
                 courses.add(new Course(Integer.parseInt(parts[0]), parts[1], parts[2], Integer.parseInt(parts[3])));
+                courses.get(courses.size()-1).setDepartment(parts[4]);
+                courses.get(courses.size()-1).setLinkedCourse(parts[5]);
             }
         }catch(IOException io){
             System.out.println("IOException occurred when reading 'teachers.txt' file.The exception is printing: ");
             io.printStackTrace();
         }
+        fillGraphs();
         return true;
+      
     }
     public void printStudents()
     {
@@ -500,6 +509,7 @@ public class DataBase {
 	    public ListGraph getGraphOfDepartment(String department){
 	    	return connectedCourses.get(department);
 	    }
-	 
 
+	    
+	    
 }
