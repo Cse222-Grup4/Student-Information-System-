@@ -1,6 +1,5 @@
 public interface User {
 
-    boolean login(String mail,String password);
     void setUserName(String name);
     void setUserSurname(String surname);
     void setUserMail(String mail);
