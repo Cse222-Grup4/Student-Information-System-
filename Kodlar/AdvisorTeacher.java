@@ -58,6 +58,12 @@ public class AdvisorTeacher extends Teacher {
         	}  		
         	System.out.println("Total credit taken by student: "+ totalCredit);
     	}
+    	if(isSatisfied(getStudent(studentID,students))) {
+        	System.out.println("Student has satisfied requirements to take this courses");
+    	}
+    	else {
+    		System.out.println("Student has not satisfied requirements to take this courses");
+    	}
     }
      /**
      * Returns students which are consultant by advisor teacher.
