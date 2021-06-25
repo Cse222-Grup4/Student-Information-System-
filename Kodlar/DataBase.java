@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
-//import java.util.HashMap;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -17,11 +17,6 @@ public class DataBase {
 	private HashMap <String ,ListGraph> connectedCourses;
     private String teachersFilePath = "src/teachers.txt";
     private String officersFilePath = "src/officers.txt";
-
-
-    // private HashMap <String,ArrayList<Student>> courseStudents;
-
-    public ArrayList<Student> getStudents(){return students;}
     DataBase() throws IOException
     {
         try {
@@ -39,12 +34,9 @@ public class DataBase {
             importOfficersFromFile();
 			appendAdvisors();
 			connectedCourses = new HashMap<>();
-            //readUsersFile(); silinmis
-
-            //writeStudentFile();
-
+			
         } catch(IOException io){
-            System.out.println("IOException occurred when reading 'teachers.txt' file.The exception is printing: ");
+            System.out.println("IOException occurred when reading file.The exception is printing: ");
             io.printStackTrace();
             throw io;
         }
