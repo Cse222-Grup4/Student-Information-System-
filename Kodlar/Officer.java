@@ -187,10 +187,14 @@ public class Officer extends Person {
 	        		showEvents();
 	        		break;
 	        	case 6:
-	        		System.out.println("Enter event");
-	        		String eventOrder=input.nextLine();
-	        		addEvent(eventOrder);
-	        		break;
+                    System.out.println("Enter event name");
+                    name = input.nextLine();
+                    System.out.println("Enter event description");
+                    String description = input.nextLine();
+                    System.out.println("Enter event date (ex: 25/11/2019):");
+                    String date = input.nextLine();
+                    addEvent(name,description,date);
+					break;
 	        	default:
 	        		System.out.println("Please choose from the menu");
 	        		break;
@@ -211,15 +215,12 @@ public class Officer extends Person {
     }
 
     /**
-     * takes a new event and adds it inside the events.txt.
-     * @param eventOrder event name
-     * @throws IOException it throws an exception if the file cannot be opened.
+     * Add an event method.
+     * @param eventOrder Event order of event.
      */
-    public void addEvent(String eventOrder) throws IOException
-	{
-        BufferedWriter writer = new BufferedWriter(new FileWriter("src/events.txt",true));
-        writer.write("\n"+eventOrder+"\n");
-        writer.write("NOT CHECKED");
-        writer.close();
+    public void addEvent(String name,String description,String date)
+    {   
+        String [] parts = date.split("/");
+        db.getEvents().offer(new Event(name,description,new Date(Integer.parseInt(parts[0]),Integer.parseInt(parts[1]),Integer.parseInt(parts[2]))));
     }
 }
