@@ -3,27 +3,48 @@ import java.util.Scanner;
 public class AdvisorTeacher extends Teacher {
 
 	private BinarySearchTree<Student> students;
-	
+		/**
+	 * Constructor for advisor teacher.
+	 * @param mail
+	 * @param password
+	 * @param department
+	 * @param db
+	 */
 	AdvisorTeacher(String mail, String password,String department,DataBase db) {
 		super(mail, password,department,db);
 		students= new BinarySearchTree<>();
 		setIsAdvisor(true);
 	}
-
+	/**
+	 * Constructor for advisor teacher.
+	 * @param mail
+	 * @param password
+	 * @param department
+	 * @param db
+	 */
 	AdvisorTeacher(String mail,String password,String name,String surname,int id,String department,DataBase db) {
 		super(mail, password, name, surname, id,department,db);
 		students= new BinarySearchTree<>();
 		setIsAdvisor(true);
 	}
-	
+	/**
+	 * Approves student's course selection.
+	 * @param studentID
+	 * @param confirmation
+	 */
     public void approveCourseSelection(int studentID,boolean confirmation){
     	getStudent(studentID,students).setCourseSelectionApprove(confirmation);
     }
-    
+     /**
+     * Displays student's informations.
+     */
     public void viewStudents() {
     	displayStudents(students);
     }
-    
+     /**
+     * Displays student's selected courses and selected course's informations.
+     * @param studentID
+     */
     public void displaySelectedCourses(int studentID) {
     	ArrayList<Course>  temp = getStudent(studentID,students).getCourses();
     	int totalCredit =0;
@@ -38,7 +59,10 @@ public class AdvisorTeacher extends Teacher {
         	System.out.println("Total credit taken by student: "+ totalCredit);
     	}
     }
-    
+     /**
+     * Returns students which are consultant by advisor teacher.
+     * @return
+     */
     public BinarySearchTree<Student> getStudents(){
     	return students;
     }
@@ -75,6 +99,9 @@ public class AdvisorTeacher extends Teacher {
 		System.out.println("What do you want to do?");
 		System.out.println("1) View Students.\n2) View Student's Selected Course\n3) Approve Course Selection\n0) Exit");
     }
+	/**
+	 * Menu function for advisor teacher.
+	 */
     public void performTasks() {
     	Scanner input = new Scanner(System.in);
     	int selection = 1,id,confirmation;
