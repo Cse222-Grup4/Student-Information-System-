@@ -463,5 +463,45 @@ public class DataBase {
 	public ArrayList<Officer> getOfficers() {
 		return officers;
 	}
+		private Course getCourseNum(String id) {
+		for(int i=0;i<courses.size();i++) {
+			if(courses.get(i).getCourseCode().equals(id)) {
+				return courses.get(i);
+			}
+		}
+		return null;
+	}
+	 private void fillGraphs(){
+	    	for(int i=0;i<courses.size();i++) {
+	    		if(!connectedCourses.containsKey(courses.get(i).getDepartment())) {
+	    			connectedCourses.put(courses.get(i).getDepartment(), new ListGraph(numOfDepartmentCourses(courses.get(i).getDepartment()),true));
+	    		}
+				if(courses.get(i).getLinkedCourse() != null) {
+					connectedCourses.get(courses.get(i).getDepartment()).insert(new Edge(i,courses.indexOf(getCourseNum(courses.get(i).getLinkedCourse()))));
+	    			//connectedCourses.get(courses.get(i).getDepartment()).insert(new Edge(i,courses.indexOf(courses.get(i).getLinkedCourse())));
+				}
+	    	}
+	    }
+	    private int numOfDepartmentCourses(String department){
+	    	int counter =0;
+	    	for(int i=0;i<courses.size();i++) {
+	    		if(courses.get(i).getDepartment().equals(department)) {
+	    			counter++;
+	    		}
+	    	}
+	    	return counter;
+	    }
+	    
+	    public Course getCourse(int index) {
+	    	return courses.get(index);
+	    }
+	    public int indexOfCourse(Course course) {
+	    	return courses.indexOf(course);
+	    }
+	    
+	    public ListGraph getGraphOfDepartment(String department){
+	    	return connectedCourses.get(department);
+	    }
+	 
 
 }
