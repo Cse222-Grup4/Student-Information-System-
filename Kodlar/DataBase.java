@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-//import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -36,10 +35,6 @@ public class DataBase {
 			appendAdvisors();
 			readEvent();
 			QuickSortStudents.sort(students);
-
-            //readUsersFile(); silinmis
-
-            //writeStudentFile();
 
         } catch(IOException io){
             System.out.println("IOException occurred when reading 'teachers.txt' file.The exception is printing: ");
@@ -356,8 +351,6 @@ public class DataBase {
             String line;
 
             while((line = bufferedReader.readLine()) != null){
-                /*HashMap<String, int> tempAttendance = new HashMap();
-                HashMap<String, Grade> tempGrades = new HashMap();*/
 
                 String parts[] = line.split(";");
 
@@ -378,9 +371,6 @@ public class DataBase {
                         }
                         tempStudent.getAttendance().put(tempCurrentCourse[0], Integer.parseInt(tempCurrentCourse[1]));
                         tempStudent.getGrades().put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[2]), Integer.parseInt(tempCurrentCourse[3]), Integer.parseInt(tempCurrentCourse[4])));
-
-                        /*tempAttendance.put(tempCurrentCourse[0],tempCurrentCourse[1]);
-                        tempGrades.put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[2]), Integer.parseInt(tempCurrentCourse[3]), Integer.parseInt(tempCurrentCourse[4])));*/
                     }
 
                     tempCourses = parts[11].split(":");
@@ -393,7 +383,6 @@ public class DataBase {
                             for(int j = 0;j < courses.size();j++){
                                 if(courses.get(j).getCourseCode().equals(tempCurrentCourse[0])) {
                                     t_arr.add(courses.get(j));
-                                    //tempStudent.getPastCourses().get(i).add(courses.get(j));
                                     tempStudent.getGrades().put(tempCurrentCourse[0], new Grade(Integer.parseInt(tempCurrentCourse[1])));
                                     break;
                                 }
@@ -478,7 +467,6 @@ public class DataBase {
 	    		}
 				if(courses.get(i).getLinkedCourse() != null) {
 					connectedCourses.get(courses.get(i).getDepartment()).insert(new Edge(i,courses.indexOf(getCourseNum(courses.get(i).getLinkedCourse()))));
-	    			//connectedCourses.get(courses.get(i).getDepartment()).insert(new Edge(i,courses.indexOf(courses.get(i).getLinkedCourse())));
 				}
 	    	}
 	    }
