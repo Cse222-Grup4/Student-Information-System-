@@ -16,6 +16,7 @@ public class Event implements Comparable<Event>{
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.eventDate = eventDate;
+	    setWaitSituation(true);
     }
 
     /**
