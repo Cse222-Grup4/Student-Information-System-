@@ -512,10 +512,8 @@ public class DataBase {
             String parts2[] = date.split("/");
             Date temp = new Date(Integer.parseInt(parts2[0]),Integer.parseInt(parts2[1]),Integer.parseInt(parts2[2]));
             events.offer(new Event(parts[0],parts[1],temp,Integer.parseInt(parts[3]) == 1,Integer.parseInt(parts[4])==1));
-            
-            
-            
         }
+			bufferedReader.close();
     }
 
     private void writeEvent() throws IOException{
@@ -527,6 +525,7 @@ public class DataBase {
             Event temp = iter.next();
             file.write(temp.getEventName() + ","+ temp.getEventDescription()+ ","+ temp.getEventDate()+ ","+temp.getSituation()+ ","+temp.getwaitSituation()+"\n");
         }
+		file.close();
     }
 	public PriorityQueue<Event> getEvents(){return events;}
 	    
