@@ -168,7 +168,12 @@ public class Officer extends Person {
 	        	case 1:
 	        		System.out.println("Enter student id: ");
 	        		id=Integer.parseInt(input.nextLine());
-	        		inquireStudentInformation(id);
+	        		if(inquireStudentInformation(id) == null) {
+	        			System.out.println("Student couldn't found!");
+	        		}
+	        		else {
+	        			System.out.println(inquireStudentInformation(id));
+	        		}
 	        		break;
 	        	case 2:
 	        		System.out.println("Enter student id: ");
