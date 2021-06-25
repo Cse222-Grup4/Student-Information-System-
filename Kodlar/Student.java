@@ -440,10 +440,16 @@ public class Student extends Person implements Comparable<Student> {
     {
         if(Grades.get(courseCode) == null)
             Grades.put(courseCode,new Grade());
-        switch (type){
-            case 1 -> Grades.get(courseCode).setMidtermGrade(grade);
-            case 2 -> Grades.get(courseCode).setFinalGrade(grade);
-            case 3 -> Grades.get(courseCode).setProjectGrade(grade);
+    switch (type) {
+            case 1:
+                Grades.get(courseCode).setMidtermGrade(grade);
+                break;
+            case 2:
+                Grades.get(courseCode).setFinalGrade(grade);
+                break;
+            case 3:
+                Grades.get(courseCode).setProjectGrade(grade);
+                break;
         }
     }
 
