@@ -155,7 +155,7 @@ public class Teacher extends Person {
         if(student.getAttendance().containsKey(courseCode)) {
             student.getAttendance().replace(courseCode, student.getAttendance().get(courseCode)+1);
         }
-        student.getAttendance().put(courseCode, 1);
+        student.getAttendance().put(courseCode, student.getAttendance().get(courseCode));
     }
     /**
      * Viewing the curriculum of department
