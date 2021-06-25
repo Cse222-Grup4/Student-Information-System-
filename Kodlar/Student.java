@@ -416,7 +416,7 @@ public class Student extends Person implements Comparable<Student> {
     public void viewCurriculum()
     {
         try {
-            FileReader myObj = new FileReader("src/" + getDepartment() + ".txt");
+            FileReader myObj = new FileReader(getDepartment() + ".txt");
             BufferedReader myReader = new BufferedReader(myObj);
 
             while (myReader.ready())
