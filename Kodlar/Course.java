@@ -265,12 +265,11 @@ public class Course implements Comparable<Course> {
      */
     @Override
     public String toString() {
-        return "CourseS{" +
+        return "Course" +
                 ", courseCode='" + courseCode + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", credit=" + credit + '\'' +
-                ",  courseTerm=" +  courseTerm +
-                '}';
+                ",  courseTerm=" +  courseTerm ;
     }
 
     /**
