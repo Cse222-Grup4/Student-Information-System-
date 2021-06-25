@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
-
+import java.util.PriorityQueue;
 public class DataBase {
 
     private ArrayList<Student> students;
