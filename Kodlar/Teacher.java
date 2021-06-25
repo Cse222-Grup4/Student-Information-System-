@@ -205,17 +205,38 @@ public class Teacher extends Person {
                 inputLine = input.nextLine();
                 choice = Integer.parseInt(inputLine);
 
-                switch (choice) {
-                    case 1 -> performViewSingleGradeTask();
-                    case 2 -> performViewCourseGradeTask();
-                    case 3 -> performAddGradeTask();
-                    case 4 -> performEditGradeTask();
-                    case 5 -> performAddAttendance();
-                    case 6 -> viewCurriculum();
-                    case 7 -> performInquireStudentInformation();
-                    case 8 -> System.out.println(this);
-                    case 0 -> System.out.println("Returning main menu..\n");
-                    default -> System.out.println("Please select from menu\n");
+                
+                    switch (choice) {
+                    case 1:
+                        performViewSingleGradeTask();
+                        break;
+                    case 2:
+                        performViewCourseGradeTask();
+                        break;
+                    case 3:
+                        performAddGradeTask();
+                        break;
+                    case 4:
+                        performEditGradeTask();
+                        break;
+                    case 5:
+                        performAddAttendance();
+                        break;
+                    case 6:
+                        viewCurriculum();
+                        break;
+                    case 7:
+                        performInquireStudentInformation();
+                        break;
+                    case 8:
+                        System.out.println(this);
+                        break;
+                    case 0:
+                        System.out.println("Returning main menu..\n");
+                        break;
+                    default:
+                        System.out.println("Please select from menu\n");
+                        break;
                 }
             } while (choice != 0);
         }catch (NumberFormatException nfe){
