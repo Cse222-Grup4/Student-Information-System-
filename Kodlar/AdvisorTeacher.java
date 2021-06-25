@@ -147,5 +147,20 @@ public class AdvisorTeacher extends Teacher {
     		}
     	}
     }
+	    private boolean isSatisfied(Student student) {
+    	ListGraph temp = database.getGraphOfDepartment(getDepartment());
+    	for(int i=0;i<student.getCourses().size();i++) {
+    		Iterator<Edge> iter = temp.edgeIterator(database.indexOfCourse(student.getCourses().get(i)));
+    		while(iter.hasNext()) {
+    			int index = iter.next().getDest();
+    			if(index != -1) {
+        			if(!student.isTaken(database.getCourse(index))) {
+        				return false;
+        			}
+    			}
+    		}
+    	}
+    	return true;
+    }
 
 }
