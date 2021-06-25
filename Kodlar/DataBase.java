@@ -33,6 +33,7 @@ public class DataBase {
             readStudentFile();
             importOfficersFromFile();
 			appendAdvisors();
+			QuickSortStudents.sort(students);
 			connectedCourses = new HashMap<>();
 			
         } catch(IOException io){
