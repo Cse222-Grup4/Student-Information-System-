@@ -1,4 +1,3 @@
-id;mail;password;name;surname
 210110;a@gtu.edu.tr;000000;Ahmet;Turan
 210120;s@gtu.edu.tr;000000;Semih;Tur
 210130;e@gtu.edu.tr;000000;Elon;Musk
