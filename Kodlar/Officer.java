@@ -28,11 +28,12 @@ public class Officer extends Person {
 	}
 
   	/**
-     * Constructor with two parameters.
-     * @param mail Officer's e-mail address.
-     * @param password Officer's password.
-     */
-  	Officer(String mail, String password) {
+     	* Constructor with two parameters.
+     	* @param mail Officer's e-mail address.
+     	* @param password Officer's password.
+     	*/
+  	Officer(String mail, String password) 
+	{
   		super(mail, password);
   	}
 
@@ -40,7 +41,8 @@ public class Officer extends Person {
   	 * Prints student's certificate.
   	 * @param student Student object.
   	 */
-  	public void printCertificate(Student student) {
+  	public void printCertificate(Student student) 
+	{
   		student.viewTranscript();
   	}
 
@@ -49,12 +51,13 @@ public class Officer extends Person {
   	* @param studentID Student's ID to inquire
   	* @return Student object
   	*/
-  	public Student inquireStudentInformation(int studentID) {
+  	public Student inquireStudentInformation(int studentID) 
+	{
     
-  		for (int i = 0; i < db.getStudents().size(); i++) {
+  		for (int i = 0; i < db.getStudents().size(); i++) 
   			if (db.getStudents().get(i).getUserID() == studentID)
   				return db.getStudents().get(i);
-  		}	
+  			
   		return null;
   	}
 
@@ -62,13 +65,14 @@ public class Officer extends Person {
   	 * Prints student's Transcript
   	 * @param studentID Student's ID to print transcript
   	 */
-  	public void viewTranscript(int studentID) {
-  		for (int i = 0; i < db.getStudents().size(); i++) {
-  			if (db.getStudents().get(i).getUserID() == studentID){
+  	public void viewTranscript(int studentID) 
+	{
+  		for (int i = 0; i < db.getStudents().size(); i++) 
+  			if (db.getStudents().get(i).getUserID() == studentID) {
   				db.getStudents().get(i).viewTranscript();
   				break;
   			}
-  		}
+  		
   	}
 
   	/**
@@ -76,8 +80,8 @@ public class Officer extends Person {
   	 * @param student Student object to be added
   	 * @return Whether student is registered
   	 */
-  	public boolean registerStudents( Student student) {
-  		
+  	public boolean registerStudents( Student student) 
+	{
   		boolean ret;
   		ret = db.getStudents().add(student);
   		return ret;
@@ -88,7 +92,8 @@ public class Officer extends Person {
   	 * Inherits from Person class
   	 * @param surName Officer's surname 
   	 */
-  	public void setUserSurname(String surName) {
+  	public void setUserSurname(String surName) 
+	{
   		super.setUserSurname(surName);
   	}
   
@@ -98,8 +103,8 @@ public class Officer extends Person {
   	 * @param orderEvent event name
   	 * @throws IOException it throws an exception if the file cannot be opened.
   	 */
-  	public void confirmCancelEvents(int situation,String orderEvent) throws IOException{
-
+  	public void confirmCancelEvents(int situation,String orderEvent) throws IOException
+	{
         File events = new File("src/events.txt");
         File temp = new File("deleted.txt");
         String line;
